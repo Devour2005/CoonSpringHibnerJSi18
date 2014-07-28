@@ -22,13 +22,29 @@
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider>
+    <!--    <security:authentication-provider>
             <security:jdbc-user-service
                     data-source-ref="dataSource"
                     users-by-username-query="select LOGIN, PASSWORD,1 from USER where LOGIN = ?"
                     authorities-by-username-query="select USER1.LOGIN,
                                                    ROLE1.name from USER USER1, ROLE ROLE1
                                                    where USER1.ROLE_ID = ROLE1.ID and USER1.LOGIN = ?"/>
+        </security:authentication-provider>-->
+
+     <!--   <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="dataSource"
+                               users-by-username-query="select login, password, 1
+      	                                           from members where login = ?"
+                               authorities-by-username-query="select l.login, r.role
+      	                                                 from members u, authorities au
+       	                                                where u.id = au.user_id and u.username = ?" />
+        </security:authentication-provider>-->
+
+        <security:authentication-provider
+                user-service-ref="customUserDetailsService">
+            <security:password-encoder hash="plaintext" />
+
         </security:authentication-provider>
+
     </security:authentication-manager>
 </beans>

@@ -1,7 +1,19 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="security"
+           uri="http://www.springframework.org/security/tags" %>
 <c:set var="app" value="${pageContext.request.contextPath}"/>
+<security:authorize
+        access="isAuthenticated()">
+    <security:authorize access="hasRole('admin')">
+        <jsp:forward page="/adminPage"/>
+    </security:authorize>
+    <security:authorize access="hasRole('user')">
+        <jsp:forward page="/welcome"/>
+    </security:authorize>
+</security:authorize>
+
 <html>
 <head>
     <title>Coon Portal</title>
@@ -32,13 +44,14 @@
 
             <h2>Login, please!</h2>
         </div>
-
+        <%--action="${app}/login.do"--%>
         <%--BEGIN OF LOGIN FORM--%>
         <div class="user_info">
             <div>
                 <sf:form name="login"
                          method="POST"
-                         action="${app}/login.do"
+                         action="j_spring_security_check"
+
                          modelAttribute="loginForm"
                          enctype="application/x-www-form-urlencoded">
 
@@ -50,12 +63,12 @@
                     <br>
 
                     <sf:label path="login"><strong>Enter Login:</strong></sf:label>
-                    <sf:input path="login" type="text" size="20"/><br>
+                    <sf:input path="j_username" type="text" size="20"/><br>
                     <sf:errors path="login" cssClass="error"/>
                     <br> <br>
 
                     <sf:label path="password"><strong>Enter Password:</strong></sf:label>
-                    <sf:input path="password" type="text" size="20"/><br>
+                    <sf:input path="j_password" type="password" size="20"/><br>
                     <sf:errors path="password" cssClass="error"/>
                     <br>
                     <br> <input type="submit" name="submit" value="Login"/>
