@@ -10,6 +10,9 @@ import com.springapp.Validators.LoginValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -75,18 +78,16 @@ public class LoginController {
      * @param loginForm
      * @param bindingResult
      * @param request
-     * @param response
      * @return
      */
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute("loginForm")
                               /*@Valid*/ LoginForm loginForm,
                               BindingResult bindingResult, Model model,
-                              HttpServletRequest request, HttpServletResponse response) {
+                              HttpServletRequest request, HttpSession session) {
 //        BasicConfigurator.configure();
-        logger.info("check  authentication!");
-        String login = loginForm.getLogin();
-        String password = loginForm.getPassword();
+        Authentication authentication;
+
         new ModelAndView("login", "loginForm", loginForm);
         loginValidator.validate(loginForm, bindingResult);
         try {
@@ -94,11 +95,20 @@ public class LoginController {
                 logger.error("Login validation error");
                 return new ModelAndView("login", "loginForm", loginForm);
             }
-            // If the user details is validated then redirecting the user to success page,
-            // else returning the error message on login page.
-            User user = userService.authorization(login, password);
 
+            authentication = SecurityContextHolder.getContext().getAuthentication();
+            logger.info("check  authentication!");
+            String login = authentication.getName();
+            User user = userService.getUserByLogin(login);
             if (user != null) {
+                session.setAttribute("user", user);
+                if (user.getRole().getRoleName().equals("admin")) {
+                    logger.trace("redirect to Admin page!!");
+                    model.addAttribute("users", userService.getAllUsers());
+                    return new ModelAndView("administration", "users", userService.getAllUsers());
+                }
+
+
                 request.getSession().setAttribute("user", user);
                 //Creating a redirection view to welcome page.
                 RedirectView redirectView = new RedirectView("welcome", true);

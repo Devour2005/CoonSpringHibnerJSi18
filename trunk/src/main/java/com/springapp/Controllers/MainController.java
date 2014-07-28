@@ -40,7 +40,7 @@ public class MainController {
 */
 
 
-    @RequestMapping(value = "/adminPage", method = RequestMethod.GET)
+    @RequestMapping(value = "adminPage", method = RequestMethod.GET)
     private ModelAndView adminPage(Model model) {
         /*List<User> userList = userService.getAllUsers();
         model.addObject("members", userList);*/
