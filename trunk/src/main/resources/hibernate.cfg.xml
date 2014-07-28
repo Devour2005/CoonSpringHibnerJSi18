@@ -1,0 +1,42 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="connection.url">jdbc:mysql://localhost/coonportalsprng</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">123qwe</property>
+        <property name="connection.pool_size">5</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="show_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
+        <property name="hibernate.connection.autocommit">false</property>
+        <property name="current_session_context_class">thread</property>
+        <property name="javax.persistence.validation.mode">none</property>
+
+        <mapping class="com.springapp.Entity.User"/>
+        <mapping class="com.springapp.Entity.Role"/>
+        <mapping class="com.springapp.Entity.Computer"/>
+        <mapping class="com.springapp.Entity.UserComputer"/>
+
+    </session-factory>
+</hibernate-configuration>
+
+        <!--C3P0 Properties-->
+        <!--  <property name="hibernate.c3p0.acquire_increment">3</property>
+          <property name="hibernate.c3p0.idle_test_period">14400</property>
+          <property name="hibernate.c3p0.timeout">25200</property>
+          <property name="hibernate.c3p0.max_size">30</property>
+          <property name="hibernate.c3p0.min_size">3</property>
+          <property name="hibernate.c3p0.max_statements">0</property>
+          <property name="c3p0.acquireIncrement">2</property>
+          <property name="c3p0.automaticTestTable">C3P0TestTable</property>
+          <property name="c3p0.idleConnectionTestPeriod">14400</property>
+          <property name="c3p0.initialPoolSize">5</property>
+          <property name="c3p0.maxPoolSize">30</property>
+          <property name="c3p0.maxIdleTime">5</property>
+          <property name="c3p0.maxStatements">0</property>
+          <property name="c3p0.minPoolSize">5</property>-->
+
