@@ -6,10 +6,10 @@
 <c:set var="app" value="${pageContext.request.contextPath}"/>
 <security:authorize
         access="isAuthenticated()">
-    <security:authorize access="hasRole('admin')">
+    <security:authorize access="hasRole('ROLE_ADMIN')">
         <jsp:forward page="/adminPage"/>
     </security:authorize>
-    <security:authorize access="hasRole('user')">
+    <security:authorize access="hasRole('ROLE_USER')">
         <jsp:forward page="/welcome"/>
     </security:authorize>
 </security:authorize>
@@ -45,15 +45,17 @@
             <h2>Login, please!</h2>
         </div>
         <%--action="${app}/login.do"--%>
+        <%--modelAttribute="loginForm"--%>
+
         <%--BEGIN OF LOGIN FORM--%>
+        <c:url value="/j_spring_security_check" var="secureUrl"/>
+
         <div class="user_info">
             <div>
-                <sf:form name="login"
-                         method="POST"
-                         action="j_spring_security_check"
-
-                         modelAttribute="loginForm"
-                         enctype="application/x-www-form-urlencoded">
+                <form name="login"
+                      method="POST"
+                      action=" <c:url value="/j_spring_security_check" />"
+                      enctype="application/x-www-form-urlencoded">
 
                     <c:if test="${not empty errorMsg}">
                         <div class="error">
@@ -61,19 +63,19 @@
                         </div>
                     </c:if>
                     <br>
-
-                    <sf:label path="login"><strong>Enter Login:</strong></sf:label>
-                    <sf:input path="j_username" type="text" size="20"/><br>
-                    <sf:errors path="login" cssClass="error"/>
+                    Enter Login:
+                    <%--<label path="login"><strong>Enter Login:</strong></label>--%>
+                    <input name="j_username" type="text" size="20"/><br>
+                    <%--<errors path="login" cssClass="error"/>--%>
                     <br> <br>
-
-                    <sf:label path="password"><strong>Enter Password:</strong></sf:label>
-                    <sf:input path="j_password" type="password" size="20"/><br>
-                    <sf:errors path="password" cssClass="error"/>
+                    Enter Password:
+                    <%--<label path="password"><strong>Enter Password:</strong></label>--%>
+                    <input name="j_password" type="password" size="20"/><br>
+                    <%--<errors path="password" cssClass="error"/>--%>
                     <br>
                     <br> <input type="submit" name="submit" value="Login"/>
 
-                </sf:form>
+                </form>
             </div>
             <div>
                 <form name="reg" action="${app}/register"

@@ -79,18 +79,18 @@
         <param-value>/WEB-INF/log4j.properties</param-value>
     </context-param>
 
-  <!--  <error-page>
-        &lt;!&ndash; Define error page to react on Java exception &ndash;&gt;
+    <error-page>
+        <!-- Define error page to react on Java exception -->
         <exception-type>java.lang.Throwable</exception-type>
-        &lt;!&ndash; The location of the resource to display in response to the error will point to the Spring MVC handler method &ndash;&gt;
+        <!-- The location of the resource to display in response to the error will point to the Spring MVC handler method -->
         <location>/pages/exceptionPages/exceptions.jsp</location>
-    </error-page>-->
+    </error-page>
 
 
-<!--    <error-page>
+    <error-page>
         <error-code>404</error-code>
         <location>/pages/exceptionPages/error.jsp</location>
-    </error-page>-->
+    </error-page>
 
 
 
