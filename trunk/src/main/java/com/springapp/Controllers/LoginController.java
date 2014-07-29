@@ -15,6 +15,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -27,6 +28,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.security.Principal;
 import java.util.Set;
 
 
@@ -64,9 +66,13 @@ public class LoginController {
     /**
      * This method will load the login.jsp page when the application starts
      */
-    @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
+/*    @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
     public ModelAndView loginPage() {
         return new ModelAndView("login", "loginForm", new LoginForm());
+    }*/
+            @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
+    public String  loginPage() {
+        return "login";
     }
 
 
@@ -75,14 +81,14 @@ public class LoginController {
      * If there is any error it will be displayed on the same page, if the user is valid then, will
      * be redirected to welcome page.
      *
-     * @param loginForm
-     * @param bindingResult
-     * @param request
-     * @return
+//     * @param loginForm
+//     * @param bindingResult
+//     * @param request
+//     * @return
      */
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+   /* @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute("loginForm")
-                              /*@Valid*/ LoginForm loginForm,
+                              *//*@Valid*//* LoginForm loginForm,
                               BindingResult bindingResult, Model model,
                               HttpServletRequest request, HttpSession session) {
 //        BasicConfigurator.configure();
@@ -126,7 +132,25 @@ public class LoginController {
             logger.error("Exception in LoginController " + e.getMessage());
             return new ModelAndView("login", "loginForm", loginForm);
         }
+    }*/
+
+
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String printWelcome(ModelMap model, Principal principal) {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        String role = String.valueOf(authentication.getAuthorities());
+        String name = principal.getName();
+        model.addAttribute("loginForm", new LoginForm());
+        if (!role.contains("ROLE_ADMIN")) {
+            return "welcome";
+        } else {
+            model.addAttribute("role", role);
+            model.addAttribute("userList", userService.getAllUsers());
+            return "administration";
+        }
     }
+
 
 
 

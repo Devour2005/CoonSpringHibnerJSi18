@@ -41,7 +41,6 @@
      </aop:aspectj-autoproxy>-->
 
 
-    <bean id="timeCounterAspect" class="com.springapp.Calculation.TimeCountAspect"/>
 
     <!--  <aop:config>
           <aop:aspect id="timeCount" ref="timeCounterAspect">
@@ -152,7 +151,7 @@
     </bean>
 
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <!-- <property name="exceptionMappings">
+<!--         <property name="exceptionMappings">
              <map>
                  <entry key="com.springapp.exceptions.CustomException"
                         value="/exceptionPages/customException"/>

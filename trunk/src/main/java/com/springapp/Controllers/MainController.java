@@ -1,6 +1,6 @@
 package com.springapp.Controllers;
 
-import com.springapp.Calculation.DataInputForm;
+
 import com.springapp.Service.ComputerService.ComputerService;
 import com.springapp.Service.UserService.UserService;
 import org.apache.commons.logging.Log;
@@ -67,10 +67,6 @@ public class MainController {
         return "calculation";
     }*/
 
-    @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
-    private ModelAndView piCalculation() {
-        return new ModelAndView("calculation", "dataInputForm", new DataInputForm());
-    }
 
  /*   @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
     private String piCalculation() {
