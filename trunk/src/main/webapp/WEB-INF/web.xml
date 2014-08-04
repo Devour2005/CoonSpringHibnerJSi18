@@ -4,6 +4,14 @@
         http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
     <display-name>Spring MVC Application</display-name>
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
 
     <listener>
@@ -16,30 +24,28 @@
         <param-value><![CDATA[
             /WEB-INF/mvc-dispatcher-servlet.xml
             /WEB-INF/applicationContext.xml
-             /WEB-INF/spring-security.xml
+            /WEB-INF/spring-security.xml
         ]]></param-value>
     </context-param>
+    <!--/WEB-INF/spring-security.xml-->
 
+    <!--<filter>
+        <filter-name>filterChainProxy</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>filterChainProxy</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-        <filter>
-            <filter-name>filterChainProxy</filter-name>
-            <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        </filter>
-        <filter-mapping>
-            <filter-name>filterChainProxy</filter-name>
-            <url-pattern>/*</url-pattern>
-        </filter-mapping>
-
-        <filter>
-            <filter-name>springSecurityFilterChain</filter-name>
-            <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        </filter>
-        <filter-mapping>
-            <filter-name>springSecurityFilterChain</filter-name>
-            <url-pattern>/*</url-pattern>
-        </filter-mapping>
-
-
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
 
 
     <servlet>
@@ -79,19 +85,18 @@
         <param-value>/WEB-INF/log4j.properties</param-value>
     </context-param>
 
-    <error-page>
-        <!-- Define error page to react on Java exception -->
-        <exception-type>java.lang.Throwable</exception-type>
-        <!-- The location of the resource to display in response to the error will point to the Spring MVC handler method -->
-        <location>/pages/exceptionPages/exceptions.jsp</location>
-    </error-page>
+    <!--  <error-page>
+          &lt;!&ndash; Define error page to react on Java exception &ndash;&gt;
+          <exception-type>java.lang.Throwable</exception-type>
+          &lt;!&ndash; The location of the resource to display in response to the error will point to the Spring MVC handler method &ndash;&gt;
+          <location>/pages/exceptionPages/exceptions.jsp</location>
+      </error-page>-->
 
 
-    <error-page>
-        <error-code>404</error-code>
-        <location>/pages/exceptionPages/error.jsp</location>
-    </error-page>
-
+    <!--    <error-page>
+            <error-code>404</error-code>
+            <location>/pages/exceptionPages/error.jsp</location>
+        </error-page>-->
 
 
 </web-app>

@@ -1,4 +1,4 @@
-package com.springapp.Service;
+package com.springapp.Service.Security;
 
 import com.springapp.Service.UserService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-@Service("customUserDetailsService")
-@Transactional(readOnly = true)
+//@Service
+//@Transactional(readOnly = true)
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -39,6 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                     credentialsNonExpired,
                     accountNonLocked,
                     getAuthorities((long) domainUser.getRole().getRoleId()));
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -52,17 +53,13 @@ public class CustomUserDetailsService implements UserDetailsService {
     public List<String> getRoles(Long role) {
         List<String> roles = new ArrayList<String>();
 
-      /*  if (role.intValue() == 1) {
+        if (role.intValue() == 1) {
             roles.add("admin");
 
         } else if (role.intValue() == 2) {
             roles.add("user");
-        }*/
-        if (role.intValue() == 1) {
-            roles.add("ROLE_ADMIN");
-        } else if (role.intValue() == 2) {
-            roles.add("ROLE_USER");
         }
+
         return roles;
     }
 
