@@ -8,9 +8,11 @@ import com.springapp.Service.RoleService.RoleService;
 import com.springapp.Service.UserService.UserService;
 import com.springapp.Validators.UpdateValidator;
 import com.springapp.mvc.UserForm;
+import org.apache.commons.collections.ListUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -36,15 +38,6 @@ public class AdminUserUpdateController {
         this.updateValidator = updateValidator;
     }
 
-    @Qualifier("updateValidator")
-    @Autowired
-    private UpdateValidator updateValidator;
-
-    @InitBinder("userForm")
-    private void initBinder(WebDataBinder binder) {
-        binder.setValidator(updateValidator);
-    }
-
     @Qualifier("userServiceImpl")
     @Autowired
     private UserService userService;
@@ -57,44 +50,55 @@ public class AdminUserUpdateController {
     @Autowired
     private RoleService roleService;
 
-    @RequestMapping(value = "/adminEdit/{userId}", method = RequestMethod.GET)
-    public String updateView(
-//            @ModelAttribute(value = "userForm")
-            UserForm userForm,
-            @PathVariable("userId") Integer userId,
+    @Qualifier("updateValidator")
+    @Autowired
+    private UpdateValidator updateValidator;
 
-//            @PathVariable("pcName") String pcName,
-//            @RequestParam("userId") Integer userId,
-//                             HttpSession session,
-            ModelMap model) {
-        User user = userService.getUserById(userId);
-        model.addAttribute("computers", computerService.getAllComputers());
-        userForm.setUser(user);
+    @InitBinder("userForm")
+    private void initBinder(WebDataBinder binder) {
+        binder.setValidator(updateValidator);
+
+//        binder.registerCustomEditor(Set.class, "computers", new ComputerCollector(Set.class) {
+        binder.registerCustomEditor(Set.class, "computers", new CustomCollectionEditor(Set.class) {
+
+            @Override
+            protected Object convertElement(Object element) {
+                String pcName = null;
+                Set<Computer> computerSet = new LinkedHashSet<>();
+
+                if (element instanceof String && !((String) element).equals("")) {
+                    pcName = (String) element;
+                    computerSet.add(computerService.getComputerByName(pcName));
+                    new UserForm().setComputers(computerSet);
+                }
+                if (element instanceof String && ((String) element).equals("Delete")) {
+                    computerSet.clear();
+                    new UserForm().setComputers(computerSet);
+                }
+                return pcName != null ? computerService.getComputerByName(pcName) : null;
+            }
+        });
+    }
+
+    @RequestMapping(value = "/adminEdit/{userId}", method = RequestMethod.GET)
+    public String updateView(@PathVariable("userId") Integer userId,
+                             UserForm userForm,
+                             ModelMap model) {
+//        User user = userService.getUserById(userId);
+        userForm.setUser(userService.getUserById(userId));
         model.addAttribute("userForm", userForm);
+        model.addAttribute("computers", computerService.getAllComputers());
+        logger.info("Go to Admin's User update Page");
         return "adminUserUpdate";
     }
 
-
-//    @RequestMapping(value = "/adminEdit.do/{userId}/{compId}", method = RequestMethod.POST)
     @RequestMapping(value = "adminEdit.do/{userId}", method = RequestMethod.POST)
     public ModelAndView updateUserProcess(@ModelAttribute(value = "userForm")
                                           UserForm userForm,
                                           @PathVariable("userId") Integer userId,
-//                                          @PathVariable("compId") Integer compId,
-                                          BindingResult result, Model model,
-                                          HttpSession session,
-                                          HttpServletRequest request) {
+                                          BindingResult result, Model model) {
         User user = userService.getUserById(userId);
         model.addAttribute("computers", computerService.getAllComputers());
-//        session.getAttribute("userForm");
-//        Computer computer = computerService.getComputerById(compId);
-        Integer compId = Integer.valueOf(request.getParameter("compId"));
-        Set<Computer> computerSet = userForm.getComputers();
-//        Computer computer = computerSet.iterator().next();
-//        Integer compId = computer.getCompId();
-        Computer computer = computerService.getComputerById(compId);
-//        model.addAttribute("computer", computer);
-
         model.addAttribute("userForm", userForm);
         updateValidator.validate(userForm, result);
 
@@ -102,29 +106,12 @@ public class AdminUserUpdateController {
             logger.error("Validation error");
             return new ModelAndView("adminUserUpdate");
         }
+//        return updatingUser(user, model, userForm, computer);
         return updatingUser(user, model, userForm);
     }
 
-    private void fillForm(UserForm userForm, User user) {
-        userForm.setUserId(user.getUserId());
-        userForm.setLogin(user.getLogin());
-        userForm.setRegDate(user.getRegDate());
-//        userForm.setComputers(userService.getAllUsersComputers(user.getLogin()));
-//        userForm.setComputers(computerService.getAllComputers());
-        Set<Computer> computerSet = userForm.getComputers();
-        Computer computer = computerSet.iterator().next();
-//        Computer computer = computerService.getComputerById(compId);
-
-
-        HashSet<Computer> computerHashSet = new LinkedHashSet<Computer>();
-        computerHashSet.add(computer);
-        userForm.setComputers(computerHashSet);
-//        computerService.getComputerByName(computer.getPcName())
-        userForm.setRole(roleService.findByName(user.getRole().getRoleName()));
-
-
-    }
-
+    /*    private ModelAndView updatingUser(User user, Model model,
+                                          UserForm userForm, Set<Computer> computer) { */
     private ModelAndView updatingUser(User user, Model model,
                                       UserForm userForm) {
         if (isEmailExists(userForm, user)) {
@@ -132,13 +119,22 @@ public class AdminUserUpdateController {
             model.addAttribute("errorMsg", "Email is already in use!");
             return new ModelAndView("adminUserUpdate");
         }
-//        model.addAttribute("computers", computerService.getAllComputers());
 //        fillForm(userForm, user, computer);
         fillForm(userForm, user);
         user = userForm.getUser();
         userService.updateUser(user);
-        logger.info("User updated!");
+        logger.info("User " + userForm.getLogin() + " is updated by Admin!");
+//        return new ModelAndView("redirect:/adminPage", "user", user);
         return new ModelAndView("redirect:/adminPage");
+    }
+
+    //    private void fillForm(UserForm userForm, User user, Set<Computer> computer) {
+    private void fillForm(UserForm userForm, User user) {
+        userForm.setUserId(user.getUserId());
+        userForm.setLogin(user.getLogin());
+        userForm.setRegDate(user.getRegDate());
+//        userForm.setComputers(computer);
+        userForm.setRole(roleService.findByName(user.getRole().getRoleName()));
     }
 
     /**

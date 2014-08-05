@@ -9,43 +9,48 @@
 
     <security:http auto-config="true" access-denied-page="/login"
                    use-expressions="true">
-        
+
         <security:intercept-url pattern="/login" access="permitAll"/>
         <security:intercept-url pattern="/admin"
                                 access="hasRole('ROLE_ADMIN')"/>
+                                <!--access="hasRole('ROLE_ADMIN')"/>-->
         <security:intercept-url pattern="/edit" access="permitAll"/>
         <security:intercept-url pattern="/editUser" access="hasRole('ROLE_ADMIN')"/>
         <security:intercept-url pattern="/welcome"
-                                access="permitAll"/>
-        <security:form-login login-page="/login" default-target-url="/login"
-                             authentication-failure-url="/nosuchuser"/>
+                                access="isAuthenticated"/>
+        <security:form-login login-page="/login" default-target-url="/welcome"
+                             authentication-failure-url="/loginError"/>
         <security:logout logout-success-url="/login"/>
     </security:http>
 
     <security:authentication-manager>
-        <security:authentication-provider>
-            <security:jdbc-user-service
+    <!--    <security:authentication-provider>
+            &lt;!&ndash;       <security:jdbc-user-service
+                           data-source-ref="dataSource"
+                           users-by-username-query="select LOGIN, PASSWORD, enabled from members where LOGIN = ?"
+                           authorities-by-username-query="select LOGIN, ROLE from roles where login = ?"&ndash;&gt;
+
+
+    &lt;!&ndash;        authorities-by-username-query="select USER1.LOGIN, ROLE1.name from USER USER1, ROLE ROLE1
+                                        where USER1.USER_ID = ROLE1.USER_ID and USER1.LOGIN = ?"&ndash;&gt;
+
+                       <security:jdbc-user-service
                     data-source-ref="dataSource"
-                    users-by-username-query="select LOGIN, PASSWORD, enabled from USER where LOGIN = ?"
-                    authorities-by-username-query="select USER1.LOGIN,
-                                                   ROLE1.name from USER USER1, ROLE ROLE1
-                                                   where USER1.USER_ID = ROLE1.USER_ID and USER1.LOGIN = ?"/>
-        </security:authentication-provider>
+                    users-by-username-query="select LOGIN, PASSWORD,1 from USER where LOGIN = ?"
 
-     <!--   <security:authentication-provider>
-            <security:jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="select login, password, 1
-      	                                           from members where login = ?"
-                               authorities-by-username-query="select l.login, r.role
-      	                                                 from members u, authorities au
-       	                                                where u.id = au.user_id and u.username = ?" />
+
+                    authorities-by-username-query="select u.LOGIN, r.roleName FROM members u, roles r  where r.role_id = u.role_id and u.login =?"
+
+                               />
+            &lt;!&ndash;  authorities-by-username-query="select USER1.LOGIN,
+                             ROLE1.roleName from members USER1, ROLE ROLE1
+                             where USER1.ROLE_ID = ROLE1.ROLE_ID and USER1.LOGIN = ?"&ndash;&gt;
         </security:authentication-provider>-->
 
-        <!--<security:authentication-provider
-                user-service-ref="customUserDetailsService">
-            <security:password-encoder hash="plaintext" />
-
-        </security:authentication-provider>-->
+          <security:authentication-provider
+                  user-service-ref="customUserDetailsService">
+              <!--<security:password-encoder hash="plaintext"/>-->
+          </security:authentication-provider>
 
     </security:authentication-manager>
 </beans>

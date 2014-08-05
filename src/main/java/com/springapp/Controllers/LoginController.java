@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.security.Principal;
 import java.util.Set;
+
 
 
 @Controller
@@ -70,7 +70,7 @@ public class LoginController {
     public ModelAndView loginPage() {
         return new ModelAndView("login", "loginForm", new LoginForm());
     }*/
-            @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
     public String  loginPage() {
         return "login";
     }
@@ -81,10 +81,10 @@ public class LoginController {
      * If there is any error it will be displayed on the same page, if the user is valid then, will
      * be redirected to welcome page.
      *
-//     * @param loginForm
-//     * @param bindingResult
-//     * @param request
-//     * @return
+     //     * @param loginForm
+     //     * @param bindingResult
+     //     * @param request
+     //     * @return
      */
    /* @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute("loginForm")
@@ -136,7 +136,7 @@ public class LoginController {
 
 
     @RequestMapping(value = "/login.do", method = RequestMethod.POST)
-    public String printWelcome(ModelMap model, Principal principal) {
+    public String printWelcome(ModelMap model, Principal principal,  HttpServletRequest request) {
         Authentication authentication = SecurityContextHolder.getContext()
                 .getAuthentication();
         String role = String.valueOf(authentication.getAuthorities());
@@ -261,4 +261,5 @@ public class LoginController {
         session.setAttribute("computer", computer);
     }
 }
+
 

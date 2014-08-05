@@ -4,7 +4,7 @@
 <%@ taglib prefix="security"
            uri="http://www.springframework.org/security/tags" %>
 <c:set var="app" value="${pageContext.request.contextPath}"/>
-<security:authorize
+<%--<security:authorize
         access="isAuthenticated()">
     <security:authorize access="hasRole('ROLE_ADMIN')">
         <jsp:forward page="/adminPage"/>
@@ -12,7 +12,7 @@
     <security:authorize access="hasRole('ROLE_USER')">
         <jsp:forward page="/welcome"/>
     </security:authorize>
-</security:authorize>
+</security:authorize>--%>
 
 <html>
 <head>
