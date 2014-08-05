@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-//@Service
-//@Transactional(readOnly = true)
+@Service
+@Transactional(readOnly = true)
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -52,14 +52,11 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public List<String> getRoles(Long role) {
         List<String> roles = new ArrayList<String>();
-
         if (role.intValue() == 1) {
             roles.add("admin");
-
         } else if (role.intValue() == 2) {
             roles.add("user");
         }
-
         return roles;
     }
 

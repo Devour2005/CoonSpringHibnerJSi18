@@ -1,18 +1,25 @@
 package com.springapp.Controllers;
 
-
+import com.springapp.Calculation.DataInputForm;
+import com.springapp.Entity.User;
 import com.springapp.Service.ComputerService.ComputerService;
 import com.springapp.Service.UserService.UserService;
+import com.springapp.mvc.LoginForm;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/")
@@ -28,9 +35,26 @@ public class MainController {
     private ComputerService computerService;
 
     @RequestMapping(value = "welcome")
-    public String userWelcomePage() {
-        logger.info("Go to welcome page");
-        return "welcome";
+    public String userWelcomePage(ModelMap model, Principal principal) {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        String role = String.valueOf(authentication.getAuthorities());
+        String login = authentication.getName();
+        User user = userService.getUserByLogin(login);
+//        User user = (User)authentication.getPrincipal();
+//        principal.getName();
+//        model.addAttribute("loginForm", new LoginForm());
+        model.addAttribute("user", user);
+        if (!role.contains("ROLE_ADMIN")) {
+            logger.info("Role User - Go to Welcome Page");
+            return "welcome";
+        } else {
+            model.addAttribute("role", role);
+            model.addAttribute("userList", userService.getAllUsers());
+            logger.info("Role Admin Go to Admin Page");
+            return "administration";
+        }
+//        return "welcome";
     }
 
   /*  @RequestMapping(value = "administration", method = RequestMethod.GET)
@@ -44,6 +68,7 @@ public class MainController {
     private ModelAndView adminPage(Model model) {
         /*List<User> userList = userService.getAllUsers();
         model.addObject("members", userList);*/
+        logger.info("Go to Admin Page!");
         model.addAttribute("computers", computerService.getAllComputers());
         return new ModelAndView("administration", "members", userService.getAllUsers());
     }
@@ -57,22 +82,22 @@ public class MainController {
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     private String registerUser() {
-        logger.info("Go to register page");
+        logger.info("Go to Register Page");
         return "register";
     }
 
-  /*  @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
-    private String piCalculation() {
-        logger.info("Go to calculation page");
-        return "calculation";
-    }*/
+    @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
+    private ModelAndView piCalculation() {
+        logger.info("Go to Calculation Page!");
+        return new ModelAndView("calculation", "dataInputForm", new DataInputForm());
+    }
 
+    @RequestMapping(value = "loginError", method = RequestMethod.GET)
+    private String noSuchUser() {
+        logger.info("No Such User!");
+        return "nosuchuser";
+    }
 
- /*   @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
-    private String piCalculation() {
-        logger.info("Go to calculation page");
-        return "calculation";
-    }*/
 
 }
 

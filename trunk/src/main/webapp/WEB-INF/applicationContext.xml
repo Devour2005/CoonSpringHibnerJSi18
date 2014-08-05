@@ -145,22 +145,15 @@
         <property name="exceptionMappings">
             <map>
                 <entry key="com.springapp.exceptions.CustomExceptionResolver" value="/exceptionPages/exceptions"/>
-                <!--<entry key="com.springapp.exceptions.TryException" value="/exceptionPages/exceptions" />-->
+                <entry key="com.springapp.exceptions.TryException" value="/exceptionPages/exceptions" />
             </map>
         </property>
     </bean>
 
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-<!--         <property name="exceptionMappings">
-             <map>
-                 <entry key="com.springapp.exceptions.CustomException"
-                        value="/exceptionPages/customException"/>
-                 <entry key="com.springapp.exceptions.SecondCustomException"
-                        value="/exceptionPages/secondCustomException"/>
-             </map>
-         </property>-->
         <property name="defaultErrorView" value="/exceptionPages/exceptions"/>
     </bean>
 
+    <!--<bean name="customUserDetailsService" class="com.springapp.Service.Security.CustomUserDetailsService"/>-->
 
 </beans>
