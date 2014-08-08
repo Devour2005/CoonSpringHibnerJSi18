@@ -142,7 +142,7 @@ public class LoginController {
         String role = String.valueOf(authentication.getAuthorities());
         String name = principal.getName();
         model.addAttribute("loginForm", new LoginForm());
-        if (!role.contains("ROLE_ADMIN")) {
+        if (!role.contains("admin")) {
             return "welcome";
         } else {
             model.addAttribute("role", role);

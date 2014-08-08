@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
@@ -35,7 +37,7 @@ public class MainController {
     private ComputerService computerService;
 
     @RequestMapping(value = "welcome")
-    public String userWelcomePage(ModelMap model, Principal principal) {
+    public String userWelcomePage(ModelMap model, Principal principal, HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext()
                 .getAuthentication();
         String role = String.valueOf(authentication.getAuthorities());
@@ -44,17 +46,20 @@ public class MainController {
 //        User user = (User)authentication.getPrincipal();
 //        principal.getName();
 //        model.addAttribute("loginForm", new LoginForm());
+        session.setAttribute("user", user);
+        model.addAttribute("role", role);
         model.addAttribute("user", user);
-        if (!role.contains("ROLE_ADMIN")) {
+//        if (!role.contains("ROLE_ADMIN")) {
+        if (!role.contains("admin")) {
             logger.info("Role User - Go to Welcome Page");
             return "welcome";
         } else {
-            model.addAttribute("role", role);
-            model.addAttribute("userList", userService.getAllUsers());
+            model.addAttribute("computers", computerService.getAllComputers());
+            model.addAttribute("members", userService.getAllUsers());
             logger.info("Role Admin Go to Admin Page");
             return "administration";
+//            return "redirect:/adminPage";
         }
-//        return "welcome";
     }
 
   /*  @RequestMapping(value = "administration", method = RequestMethod.GET)
@@ -63,7 +68,7 @@ public class MainController {
     }
 */
 
-
+    @Secured("admin")
     @RequestMapping(value = "adminPage", method = RequestMethod.GET)
     private ModelAndView adminPage(Model model) {
         /*List<User> userList = userService.getAllUsers();
@@ -73,6 +78,7 @@ public class MainController {
         return new ModelAndView("administration", "members", userService.getAllUsers());
     }
 
+    @Secured("admin")
     @RequestMapping(value = "delete", method = RequestMethod.GET)
     public ModelAndView deleteUser(@RequestParam("userId") Integer userId) {
         userService.deleteUser(userId);
@@ -86,6 +92,7 @@ public class MainController {
         return "register";
     }
 
+    @Secured(value = {"admin", "user"})
     @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
     private ModelAndView piCalculation() {
         logger.info("Go to Calculation Page!");

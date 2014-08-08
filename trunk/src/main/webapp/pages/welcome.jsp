@@ -106,28 +106,16 @@
         <!--END OF PORTAL DESCRIPTION-->
         <br>
 
+
         <div>
-
-            <div>
-                <form name="calc" action="${app}/calculatePage"
-                      method="GET"
-                      enctype="application/x-www-form-urlencoded">
-                    <input type="submit" name="submit" value="Calc"/>
-                </form>
-            </div>
-
-
-            <%-- <div class="redaction_block">
-                 <form name="listUsers" action="${app}administration"
-                 &lt;%&ndash;<form name="listUsers" action="${app}/viewall"&ndash;%&gt;
-                       method="GET">
-                     &lt;%&ndash;enctype="application/x-www-form-urlencoded">&ndash;%&gt;
-                     &lt;%&ndash;<input type=hidden name="action" value="listUser"/>&ndash;%&gt;
-                     <input type="SUBMIT" name="SUBMIT" value="View All"/>
-                 </form>
-             </div>--%>
-
+            <c:if test="${not empty errorMsg}">
+                <div class="error">
+                    <c:out value="${errorMsg}"/>
+                </div>
+            </c:if>
+            <br>
         </div>
+
     </DIV>
     <!--END OF CENTRAL BLOCK-->
 
