@@ -2,55 +2,46 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/security
         http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
-    <security:http auto-config="true" access-denied-page="/login"
+    <security:http auto-config="true" access-denied-page="/welcome"
                    use-expressions="true">
 
-        <security:intercept-url pattern="/login" access="permitAll"/>
-        <security:intercept-url pattern="/admin"
-                                access="hasRole('ROLE_ADMIN')"/>
-                                <!--access="hasRole('ROLE_ADMIN')"/>-->
-        <security:intercept-url pattern="/edit" access="permitAll"/>
-        <security:intercept-url pattern="/editUser" access="hasRole('ROLE_ADMIN')"/>
-        <security:intercept-url pattern="/welcome"
-                                access="isAuthenticated"/>
+        <!--<security:global-method-security secured-annotations="enabled"/>-->
+
         <security:form-login login-page="/login" default-target-url="/welcome"
                              authentication-failure-url="/loginError"/>
+        <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/adminPage"
+                                access="hasRole('admin')"/>
+        <!--access="hasRole('ROLE_ADMIN')"/>-->
+        <security:intercept-url pattern="/edit" access="hasAnyRole('admin', 'user')"/>
+        <security:intercept-url pattern="/editUser" access="hasRole('admin')"/>
+        <security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')" />
+                                <!--access="permitAll"/>-->
+        <!--access="hasAnyRole(ROLE_ADMIN, ROLE_USER)"/>-->
+        <!--access="permitAll"/>-->
+
         <security:logout logout-success-url="/login"/>
     </security:http>
 
     <security:authentication-manager>
-    <!--    <security:authentication-provider>
-            &lt;!&ndash;       <security:jdbc-user-service
-                           data-source-ref="dataSource"
-                           users-by-username-query="select LOGIN, PASSWORD, enabled from members where LOGIN = ?"
-                           authorities-by-username-query="select LOGIN, ROLE from roles where login = ?"&ndash;&gt;
+        <security:authentication-provider
+                user-service-ref="customUserDetailsService">
+            <security:password-encoder hash="plaintext"/>
+        </security:authentication-provider>
 
+        <!--    <security:authentication-provider>
+                <security:jdbc-user-service
+                        data-source-ref="dataSource"
+                        users-by-username-query="select LOGIN, PASSWORD, enabled from members where LOGIN = ?"
 
-    &lt;!&ndash;        authorities-by-username-query="select USER1.LOGIN, ROLE1.name from USER USER1, ROLE ROLE1
-                                        where USER1.USER_ID = ROLE1.USER_ID and USER1.LOGIN = ?"&ndash;&gt;
-
-                       <security:jdbc-user-service
-                    data-source-ref="dataSource"
-                    users-by-username-query="select LOGIN, PASSWORD,1 from USER where LOGIN = ?"
-
-
-                    authorities-by-username-query="select u.LOGIN, r.roleName FROM members u, roles r  where r.role_id = u.role_id and u.login =?"
-
-                               />
-            &lt;!&ndash;  authorities-by-username-query="select USER1.LOGIN,
-                             ROLE1.roleName from members USER1, ROLE ROLE1
-                             where USER1.ROLE_ID = ROLE1.ROLE_ID and USER1.LOGIN = ?"&ndash;&gt;
-        </security:authentication-provider>-->
-
-          <security:authentication-provider
-                  user-service-ref="customUserDetailsService">
-              <!--<security:password-encoder hash="plaintext"/>-->
-          </security:authentication-provider>
-
+                        authorities-by-username-query="select USER1.LOGIN, ROLE1.roleName from MEMBERS USER1, ROLES ROLE1
+                                                where USER1.ROLE_ID  = ROLE1.ROLE_ID and USER1.LOGIN = ?"/>
+            </security:authentication-provider>-->
     </security:authentication-manager>
 </beans>
