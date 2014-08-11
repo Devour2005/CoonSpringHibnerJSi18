@@ -36,23 +36,22 @@
     <!-- Enable AspectJ style of Spring AOP -->
     <aop:aspectj-autoproxy/>
 
-    <!-- <aop:aspectj-autoproxy proxy-target-class="true">
+   <!--  <aop:aspectj-autoproxy proxy-target-class="true">
          <aop:include name="timeCounterAspect" />
      </aop:aspectj-autoproxy>-->
 
+    <bean id="timeCounterAspect" class="com.springapp.Calculation.TimeCountAspect"/>
 
-
-    <!--  <aop:config>
+      <aop:config>
           <aop:aspect id="timeCount" ref="timeCounterAspect">
               <aop:pointcut id="calculation" expression=
                       "execution(* com.springapp.Calculation.PiCalculator.call(..))"/>
-              &lt;!&ndash; Совет, выполняемый и до, и после &ndash;&gt;
+              <!-- Совет, выполняемый и до, и после -->
               <aop:around
                       pointcut-ref="calculation"
                       method="timeCounterClass"/>
           </aop:aspect>
       </aop:config>
-  -->
 
     <bean id="propertiesPlaceholderConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
