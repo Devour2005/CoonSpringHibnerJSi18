@@ -5,6 +5,7 @@
 <%--<%@ attribute name="list" required="true" type="java.util.List"%>--%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <c:set var="app" value="${pageContext.request.contextPath}"/>
+<jsp:useBean id="computers" scope="request" type="java.util.Collection"/>
 <html>
 <head>
     <title>Coon Portal - Admin User Update Page</title>
@@ -29,6 +30,16 @@
 
     <!--LEFT BLOCK-->
     <DIV class="content_left">
+        <div class="user_info">
+            <br> To Do:
+            <p class="error">
+                1. Pc "Delete" option doesn't work yet!<br>
+                <br>
+                2. Doesn't Update correctly ANY user<br>
+                from list. Only authorized one.
+            </p>
+
+        </div>
     </DIV>
     <!--END OF LEFT BLOCK-->
 
@@ -112,10 +123,8 @@
                     <sf:label path="email"><strong>Enter new Email:</strong></sf:label> <br>
                     <sf:input path="email" type="text" size="20"/><br>
                     <sf:errors path="email" cssClass="error"/>
-                    <%--<sf:label path="computers"><strong>Enter new PC:</strong></sf:label> <br>
-                    <sf:input path="computers" type="text" size="50"/><br>
-                    <sf:errors path="computers" cssClass="error"/>
---%>
+                    <br>
+
                     <strong>PC Assigned:</strong>
 
                     <h3 class="h3">
@@ -133,44 +142,28 @@
                         </td>
                     </h3>
 
-                    <%--  <sf:label path="role">Role</sf:label>
-                      <sf:select path="role">
-                          <sf:option value="user" label="user"/>
-                          <sf:option value="admin" label="admin"/>
-                      </sf:select>--%>
 
-                    <%--<sf:option value="${comp}" itemValue="compId" itemLabel="PC Name">--%>
-
-                    <sf:label path="computers">Enter PC:</sf:label> <br>
-                    <sf:select path="computers" size="1">
-                        <c:forEach items="${computers}" var="comp" >
-                            <sf:option value="${comp}" itemValue="compId" itemLabel="PC Name">
-                                <c:out value="${comp}"/>
-                            </sf:option>
-
-                            <%--  <sf:option value="${comp.compId}">
-                                <c:out value="${comp.compId}"/>
-                            </sf:option>--%>
-                        </c:forEach>
-                    </sf:select>
-                    <br> <br>
-
-                <%--    <form:select path="country">
-                    <form:option value="0" label="Select" />
-                    <form:options items="${countryList}" itemValue="countryId" itemLabel="countryName" />
-                    </form:select>--%>
+                    <form:label path="computers">Enter PC:</form:label> <br>
+                    <form:select multiple="true" path="computers" size="3">
+                        <%--<form:option value="NONE" label="<--- Select --->"/>--%>
+                        <form:option value="Delete" label="Delete"/>
+                        <form:options items="${computers}" itemValue="pcName" itemLabel="pcName"/>
+                    </form:select><br>
 
 
-                    <%--    <sf:label path="computers">Enter PC:</sf:label> <br>
-                    <sf:select path="computers" size="1">
-                        <sf:option value="NONE" label="--- Select ---"/>
-                        <c:forEach items="${computers}" var="comp">
-                            <sf:option value="${comp.compId}">
-                                <c:out value="${comp.pcName}"/>
-                            </sf:option>
-                        </c:forEach>
-                    </sf:select>
-                    <br> <br>--%>
+                    <%--   <label for="pcName">Enter PC:</label> <br>
+                       <select id="pcName" name="pcName" multiple size="3">
+                           <option value="NONE">--- Select ---</option>
+                           <option value="PC1">PC1</option>
+                           <option value="PC2">PC2</option>
+                           <option value="PC3">PC3</option>
+                           <option value="PC4">PC4</option>
+                           <option value="PC5">PC5</option>
+                           <option value="PC6">PC6</option>
+                           <option value="PC7">PC7</option>
+                           <option value="PC8">PC8</option>
+                       </select>
+                       <br>--%>
 
                     <input type="SUBMIT" name="SUBMIT" value="Update User"/>
                 </sf:form>

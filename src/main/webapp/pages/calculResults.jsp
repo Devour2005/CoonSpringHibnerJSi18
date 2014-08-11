@@ -39,13 +39,12 @@
         <div>
             <ul id="navigation">
                 <li class="first-link"><a href="${app}/pages/welcome.jsp" title="home">Home</a></li>
-                <li><a href="${app}/pages/calculation.jsp" title="calculation">Calculation</a></li>
+                <li><a href="${app}/calculatePage" title="calculation">Calculation</a></li>
                 <li><a href="${app}/pages/userprofile.jsp" title="user profile">User profile</a></li>
                 <li><a href="${app}/pages/contacts.jsp" title="contacts">Contacts</a></li>
             </ul>
         </div>
         <!--END OF NAVIGATION MENU -->
-
 
 
         <!--BEGIN OF CALCULATION RESULTS-->
@@ -56,39 +55,9 @@
                 82306647093844609550582231725359408128481117450284102701938521 <br>
                 10555964462294895493038196 <br>
             </p>
-            <c:set var="resultStr">${result}</c:set>
-            Calculated Pi= <c:out value="${resultStr}"/>
-            <br>
-            <%-- split
-            <c:if test= "${f:length(resultStr)>65}" >
-            this is done
-            <c:out value="${fn:split(resultStr, '<br>')}"/>
-            gogogo
-            &lt;%&ndash;<c:out value="${resultStr}"/><br>&ndash;%&gt;
-            </c:if>
 
-            <br>
-            Length = ${f:length(resultStr)}
-            --%>
-            <%--
-
-            ${f:length(result)}
-
-            <c:set var="myValue">${someenum}</c:set>
-            ${somemap[myValue]}
-
-            <c:set var="idAsString">${model.data.id}</c:set>
-            <c:out value="${model.myHashtable[idAsString]}"/>--%>
             <p>
                 Elapsed Time = ${elapsedTime}
-            </p>
-
-            <p>
-                <%--Calculated Pi EL1 = <c:out value="=${fn:length(result)}"/>--%>
-            </p>
-
-            <p>
-                <%--Calculated Pi EL2 = ${f:length($(result))}--%>
             </p>
 
             <p>Calculated Pi = ${result} </p>

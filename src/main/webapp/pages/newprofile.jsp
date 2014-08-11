@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>Coon Portal - New User Profile</title>
-    <link rel="stylesheet" type="text/css" href="../style.css"/>
+    <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
 </head>
 <body>
 <!--BEGIN of HEADER-->

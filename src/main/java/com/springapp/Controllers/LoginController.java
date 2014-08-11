@@ -3,6 +3,7 @@ package com.springapp.Controllers;
 
 import com.springapp.Entity.Computer;
 import com.springapp.Entity.User;
+import com.springapp.Service.ComputerService.ComputerService;
 import com.springapp.Service.RoleService.RoleService;
 import com.springapp.Service.UserService.UserService;
 import com.springapp.mvc.LoginForm;
@@ -31,7 +32,6 @@ import java.security.Principal;
 import java.util.Set;
 
 
-
 @Controller
 public class LoginController {
     //Log4j
@@ -58,6 +58,10 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Qualifier("computerServiceImpl")
+    @Autowired
+    private ComputerService computerService;
+
     @Qualifier("roleServiceImpl")
     @Autowired
     private RoleService roleService;
@@ -70,21 +74,84 @@ public class LoginController {
     public ModelAndView loginPage() {
         return new ModelAndView("login", "loginForm", new LoginForm());
     }*/
-    @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
-    public String  loginPage() {
+
+
+/*    @RequestMapping(value = {"/", "login"}, method = RequestMethod.GET)
+    public String loginPage() {
         return "login";
+    }*/
+
+
+//    @RequestMapping(value = {"/login"})
+//    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+//    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String userWelcomePage(/*@ModelAttribute("loginForm")
+                                  LoginForm loginForm,*/
+                                  ModelMap model,
+                                  HttpSession session,
+                                  Principal principal,
+                                  BindingResult bindingResult) {
+
+      /*  loginValidator.validate(loginForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            logger.error("Login validation error");
+            model.addAttribute("loginForm", loginForm);
+            return "login";
+        }*/
+
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        String role = String.valueOf(authentication.getAuthorities());
+        String login = authentication.getName();
+        User user = userService.getUserByLogin(login);
+        session.setAttribute("user", user);
+        model.addAttribute("role", role);
+        model.addAttribute("user", user);
+        if (!role.contains("admin")) {
+            logger.info("Role 'User' - Go to Welcome Page");
+            return "welcome";
+        } else {
+            model.addAttribute("computers", computerService.getAllComputers());
+            model.addAttribute("members", userService.getAllUsers());
+            logger.info("Role 'Admin' - Go to Admin Page");
+            return "administration";
+//            return "redirect:/adminPage";
+        }
     }
 
+   /*
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    public String printWelcome(ModelMap model, Principal principal,  HttpServletRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        String role = String.valueOf(authentication.getAuthorities());
+        String name = principal.getName();
+        model.addAttribute("loginForm", new LoginForm());
+        if (!role.contains("admin")) {
+            return "welcome";
+        } else {
+            model.addAttribute("role", role);
+            model.addAttribute("userList", userService.getAllUsers());
+            return "administration";
+        }
+    }*/
+
+    private void getSessionUser(HttpServletRequest request, User user) {
+        HttpSession session = request.getSession(true);
+        session.setMaxInactiveInterval(900);
+        session.setAttribute("user", user);
+    }
 
     /**
      * This method will be called when the user submits the login details from login.jsp page.
      * If there is any error it will be displayed on the same page, if the user is valid then, will
      * be redirected to welcome page.
-     *
-     //     * @param loginForm
-     //     * @param bindingResult
-     //     * @param request
-     //     * @return
+     * <p/>
+     * //     * @param loginForm
+     * //     * @param bindingResult
+     * //     * @param request
+     * //     * @return
      */
    /* @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public ModelAndView login(@ModelAttribute("loginForm")
@@ -135,21 +202,6 @@ public class LoginController {
     }*/
 
 
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
-    public String printWelcome(ModelMap model, Principal principal,  HttpServletRequest request) {
-        Authentication authentication = SecurityContextHolder.getContext()
-                .getAuthentication();
-        String role = String.valueOf(authentication.getAuthorities());
-        String name = principal.getName();
-        model.addAttribute("loginForm", new LoginForm());
-        if (!role.contains("admin")) {
-            return "welcome";
-        } else {
-            model.addAttribute("role", role);
-            model.addAttribute("userList", userService.getAllUsers());
-            return "administration";
-        }
-    }
 
 
 
@@ -219,11 +271,6 @@ public class LoginController {
     }
 */
 
-    private void getSessionUser(HttpServletRequest request, User user) {
-        HttpSession session = request.getSession(true);
-        session.setMaxInactiveInterval(900);
-        session.setAttribute("user", user);
-    }
 
 
 
@@ -248,8 +295,6 @@ public class LoginController {
         return "HiUserPage";
 
    }*/
-
-
     public boolean checkEmptyField(String fieldName) {
         return fieldName != null && fieldName.trim().length() > 0;
     }

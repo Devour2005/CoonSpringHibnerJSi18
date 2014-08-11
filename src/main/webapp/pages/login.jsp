@@ -44,17 +44,15 @@
 
             <h2>Login, please!</h2>
         </div>
-        <%--action="${app}/login.do"--%>
-        <%--modelAttribute="loginForm"--%>
 
         <%--BEGIN OF LOGIN FORM--%>
-        <c:url value="/j_spring_security_check" var="secureUrl"/>
+        <c:url var="secureUrl" value="/j_spring_security_check"/>
 
         <div class="user_info">
             <div>
                 <form name="login"
                       method="POST"
-                      action=" <c:url value="/j_spring_security_check" />"
+                      action=" <c:url value="${secureUrl}"/>"
                       enctype="application/x-www-form-urlencoded">
 
                     <c:if test="${not empty errorMsg}">
@@ -62,13 +60,14 @@
                             <c:out value="${errorMsg}"/>
                         </div>
                     </c:if>
+
                     <br>
-                    Enter Login:
+                    <strong> Login: </strong>
                     <%--<label path="login"><strong>Enter Login:</strong></label>--%>
                     <input name="j_username" type="text" size="20"/><br>
                     <%--<errors path="login" cssClass="error"/>--%>
                     <br> <br>
-                    Enter Password:
+                    <strong> Password: </strong>
                     <%--<label path="password"><strong>Enter Password:</strong></label>--%>
                     <input name="j_password" type="password" size="20"/><br>
                     <%--<errors path="password" cssClass="error"/>--%>
@@ -109,21 +108,6 @@
         <br>
 
 
-        <%-- <a href="${app}/pages/thankForReg.jsp">THANKS</a>
-         <br>
-         <a href="${app}/pages/exceptionPages/error.jsp">ERROR</a>
-         <br>
-         <a href="${app}/pages/exceptionPages/exceptions.jsp">EXCEPTION</a>
-         <br>
-
-         <div>
-             <form name="reg" action="${app}exc.do"
-                   method="GET"
-                   enctype="application/x-www-form-urlencoded">
-                 <input type="submit" name="submit" value="Exc"/>
-             </form>
-         </div>
-         &lt;%&ndash;<a href="${app}/exc">EXC</a>&ndash;%&gt;--%>
     </DIV>
     <!--END OF CENTRAL BLOCK-->
 

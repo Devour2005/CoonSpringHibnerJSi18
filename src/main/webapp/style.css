@@ -197,7 +197,7 @@ p {
     margin: 20px;
     padding: 20px;
     float: right;
-    line-height: 15px; /*расстояние между строк*/
+    line-height: 18px; /*расстояние между строк*/
     text-align: center;
 }
 
