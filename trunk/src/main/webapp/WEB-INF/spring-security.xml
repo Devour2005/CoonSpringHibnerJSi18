@@ -13,8 +13,9 @@
 
         <!--<security:global-method-security secured-annotations="enabled"/>-->
 
+
         <security:form-login login-page="/login" default-target-url="/welcome"
-                             authentication-failure-url="/loginError"/>
+                             authentication-failure-url="/loginError"/>       <!--authentication-failure-url="/loginError"/>-->
         <security:intercept-url pattern="/login" access="permitAll"/>
         <security:intercept-url pattern="/adminPage"
                                 access="hasRole('admin')"/>
