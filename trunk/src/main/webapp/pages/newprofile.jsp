@@ -73,16 +73,7 @@
                                     <p>No PC Assigned</p>
                                 </c:otherwise>
                             </c:choose>
-                         <%--   <c:choose>
-                                <c:when test="${empty comp}">
-                                    <h3>No PC Assigned</h3>
-                                </c:when>
-                                <c:when test="${not empty comp}">
-                                    <c:forEach items="${user.computers}" var="comp">
-                                        <c:out value="${comp.pcName}"/>
-                                    </c:forEach>
-                                </c:when>
-                            </c:choose>--%>
+
                         </td>
                     </h3>
 

@@ -1,9 +1,5 @@
 package com.springapp.Calculation;
 
-import com.springapp.Calculation.DataInputForm;
-import com.springapp.Calculation.IParallelPiEx;
-import com.springapp.Calculation.OneElementCalculation;
-import com.springapp.Calculation.PiCalculator;
 import com.springapp.Validators.CalculationValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
@@ -20,7 +19,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.*;
 
 /**
@@ -36,10 +34,6 @@ public class CalculatorController implements Callable<BigDecimal>, IParallelPiEx
 
     public CalculatorController() {
     }
-
-    @Qualifier("piCalculator")
-    @Autowired
-    private PiCalculator piCalculator;
 
     @Qualifier("calculationValidator")
     @Autowired
@@ -73,9 +67,9 @@ public class CalculatorController implements Callable<BigDecimal>, IParallelPiEx
         precision = Integer.valueOf(dataInputForm.getPrecision());
         numberOfThreads = Integer.valueOf(dataInputForm.getNumberOfThreads());
         BigDecimal result = call();
-        model.addAttribute("elapsedTime", dataInputForm.getElapsedTime());
         model.addAttribute("result", result);
         model.addAttribute("precision", dataInputForm.getPrecision());
+        model.addAttribute("elapsedTime", dataInputForm.getElapsedTime());
         model.addAttribute("numberOfThreads", dataInputForm.getNumberOfThreads());
         return "calculResults";
     }
@@ -119,35 +113,9 @@ public class CalculatorController implements Callable<BigDecimal>, IParallelPiEx
         }
         return sum;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-    /*@RequestMapping(value = "/POST", method = RequestMethod.POST)
-    public ModelAndView calculMethod(@ModelAttribute(value = "dataInputForm")
-                                     DataInputForm dataInputForm,
-                                     BindingResult bindingResult,
-                                     Model model) throws Exception {
-        calculationValidator.validate(dataInputForm, bindingResult);
-        if (bindingResult.hasErrors()) {
-            logger.error("Calculation validation error");
-            return new ModelAndView("calculation", "dataInputForm", new DataInputForm());
-        }
-        precision = Integer.valueOf(dataInputForm.getPrecision());
-        numberOfThreads = Integer.valueOf(dataInputForm.getNumberOfThreads());
-        BigDecimal result = piCalculator.call();
-        model.addAttribute("elapsedTime", elapsedTime);
-        model.addAttribute("result", result);
-        model.addAttribute("precision", dataInputForm.getPrecision());
-        model.addAttribute("numberOfThreads", dataInputForm.getNumberOfThreads());
-        return new ModelAndView("calculResults");
-    }*/
 }
+
+
+
+
+

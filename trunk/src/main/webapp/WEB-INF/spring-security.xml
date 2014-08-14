@@ -11,21 +11,20 @@
     <security:http auto-config="true" access-denied-page="/welcome"
                    use-expressions="true">
 
-        <!--<security:global-method-security secured-annotations="enabled"/>-->
-
-
         <security:form-login login-page="/login" default-target-url="/welcome"
-                             authentication-failure-url="/loginError"/>       <!--authentication-failure-url="/loginError"/>-->
+                             authentication-failure-url="/loginError"/>
         <security:intercept-url pattern="/login" access="permitAll"/>
-        <security:intercept-url pattern="/adminPage"
-                                access="hasRole('admin')"/>
-        <!--access="hasRole('ROLE_ADMIN')"/>-->
+
+        <!--Commented till testing-->
+        <!-- <security:intercept-url pattern="/adminPage"
+                                access="hasRole('admin')"/>-->
+
         <security:intercept-url pattern="/edit" access="hasAnyRole('admin', 'user')"/>
         <security:intercept-url pattern="/editUser" access="hasRole('admin')"/>
-        <security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')" />
-                                <!--access="permitAll"/>-->
-        <!--access="hasAnyRole(ROLE_ADMIN, ROLE_USER)"/>-->
-        <!--access="permitAll"/>-->
+        <security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')"/>
+        <security:intercept-url pattern="/calculation" access="hasAnyRole('admin', 'user')"/>
+        <security:intercept-url pattern="/calculResults" access="hasAnyRole('admin', 'user')"/>
+        <security:intercept-url pattern="/calculatePage" access="hasAnyRole('admin', 'user')"/>
 
         <security:logout logout-success-url="/login"/>
     </security:http>

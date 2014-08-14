@@ -56,18 +56,14 @@ public class UserUptadeController {
     private RoleService roleService;
 
     @RequestMapping(value = "/edit/{userId}", method = RequestMethod.GET)
-//    public ModelAndView registerView(@ModelAttribute(value = "userForm")
     public String updateView(/*@ModelAttribute(value = "userForm")*/
                              @PathVariable("userId") Integer userId,
                              UserForm userForm,
-                             HttpSession session,
                              ModelMap model) {
         User user = userService.getUserById(userId);
-//        User user = userService.getUserByEmail("user2@g.cc");          //TODO: DELETE! FOR DEBUG ONLY
         userForm.setUser(user);
         model.addAttribute("userForm", userForm);
         return "profileupdate";
-//        return new ModelAndView("profileupdate", "userForm", userForm);
     }
 
 
@@ -140,96 +136,3 @@ public class UserUptadeController {
                 && !enteredEmail.equals(currentUser.getEmail());
     }
 }
-
-
-
-   /* //Filling form with new data from JSP page
-        fillForm(userForm, user);
-        user = userForm.getUser();
-
-        try {
-            userService.updateUser(user);
-            logger.info("User updated!");
-            request.getSession().setAttribute("user", user);
-            return "newprofile";
-        } catch (NotUniqueEmailException e) {
-            logger.error("Can't update user - not unique email!!", e);
-            model.addAttribute("errorMsg", "Can't update user - not unique email!!!");
-            return "profileupdate";
-        }*/
-
-
-
-    /* //    @RequestMapping(value = "edit", method = RequestMethod.GET)
-      @RequestMapping(value = "/edit.do", method = RequestMethod.GET)
-      public ModelAndView registerView(@ModelAttribute(value = "userForm")
-  //    public UserForm registerView(@ModelAttribute(value = "userForm")
-  //                                         UserForm userForm,
-                                       @RequestParam String login,
-                                       ModelMap model,
-                                       HttpSession session,
-                                       HttpServletRequest request) {
-
-          UserForm userForm = new UserForm();
-          userForm.setUser(userService.getUserByLogin(login));
-  //        model.addAttribute("userForm", userForm);
-  //        return "profileupdate";
-          return new ModelAndView("profileupdate", "userForm", userForm);
-  //        return userForm;
-      }
-
-
-
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-      public ModelAndView updateView(@ModelAttribute(value = "userForm")
-                                           HttpSession session) {
-          User user = (User) session.getAttribute("user");
-          UserForm userForm = new UserForm();
-          userForm.setUser(user);
-          return new ModelAndView("profileupdate", "userForm", userForm);
-      }
-
-
-
-
-
-     @RequestMapping(value = "/updateContact", method = RequestMethod.GET)
-      public ModelAndView edit(@RequestParam("id") Integer id) {
-          ModelAndView mav = new ModelAndView("editContact");
-          Contact contact = contactsDAO.getById(id);
-          mav.addObject("editContact", contact);
-          return mav;
-      }
-
-      @RequestMapping(value = "/updateContact", method = RequestMethod.POST)
-      public String update(@ModelAttribute("editContact") Contact contact, BindingResult result, SessionStatus status) {
-          validator.validate(contact, result);
-          if (result.hasErrors()) {
-              return "editContact";
-          }
-          contactsDAO.update(contact);
-          status.setComplete();
-          return "redirect:viewAllContacts.do";
-      }
-
-
-
-
-      @RequestMapping(value = "editserv", method = RequestMethod.POST)
-      public @ResponseBody
-      String ajaxEditUser(@ModelAttribute("template") Template template,
-                          BindingResult bindingResult) {
-
-          Utils utils = new Utils();
-          User user = utils.transformation(template);
-          user.setId(userDaoService.findByLogin(template.getLogin()).getId());
-
-          if (template.getRole().equalsIgnoreCase("User")) {
-              user.setRole(roleDaoService.findByName("User"));
-          } else {
-              user.setRole(roleDaoService.findByName("Admin"));
-          }
-          userDaoService.update(user);
-          return "Success";
-      }
-  */

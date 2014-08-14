@@ -2,11 +2,6 @@ package com.springapp.Calculation;
 
 import java.math.BigDecimal;
 
-/**
- * The test assignment class entry point. Please implement the following interface.
- * The algorithm must be parallelizable
- * to any number of threads and have the specified precision of the return value.
- */
 public interface IParallelPiEx {
 
     /**

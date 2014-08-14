@@ -87,7 +87,6 @@
         <%--END OF LOGIN FORM--%>
         <br>
 
-        <a href="${app}/calculatePage" title="calculation">Calculation</a> <br> <br>
 
     </DIV>
     <!--END OF LEFT BLOCK-->
@@ -97,12 +96,14 @@
 
 
         <div class="redaction_block">
+            <p class="H3_ERROR"> FOR TESTING </p>
             <form name="listUsers" action="${app}adminPage"
                   method="GET">
-                <%--enctype="application/x-www-form-urlencoded">--%>
-                <%--<input type=hidden name="action" value="listUser"/>--%>
                 <input type="SUBMIT" name="SUBMIT" value="View All"/>
             </form>
+            <br><br>
+            <a href="${app}/calculatePage"
+               title="calculation">Calculation</a></li>
         </div>
 
         <br>

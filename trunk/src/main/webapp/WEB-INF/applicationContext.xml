@@ -40,18 +40,18 @@
          <aop:include name="timeCounterAspect" />
      </aop:aspectj-autoproxy>-->
 
-    <bean id="timeCounterAspect" class="com.springapp.Calculation.TimeCountAspect"/>
-
-      <aop:config>
-          <aop:aspect id="timeCount" ref="timeCounterAspect">
-              <aop:pointcut id="calculation" expression=
-                      "execution(* com.springapp.Calculation.PiCalculator.call(..))"/>
-              <!-- Совет, выполняемый и до, и после -->
-              <aop:around
-                      pointcut-ref="calculation"
-                      method="timeCounterClass"/>
-          </aop:aspect>
-      </aop:config>
+   <bean id="timeCounterAspect" class="com.springapp.Calculation.TimeCountAspect"/>
+    <!--
+     <aop:config>
+         <aop:aspect id="timeCount" ref="timeCounterAspect">
+             <aop:pointcut id="calculation" expression=
+                     "execution(* com.springapp.Calculation.PiCalculator.call(..))"/>
+             &lt;!&ndash; Совет, выполняемый и до, и после &ndash;&gt;
+             <aop:around
+                     pointcut-ref="calculation"
+                     method="timeCounterClass"/>
+         </aop:aspect>
+     </aop:config>-->
 
     <bean id="propertiesPlaceholderConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

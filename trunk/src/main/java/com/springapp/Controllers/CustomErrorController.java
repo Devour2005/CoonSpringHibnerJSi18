@@ -1,5 +1,7 @@
 package com.springapp.Controllers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +16,7 @@ import java.text.MessageFormat;
  */
 @Controller
 public class CustomErrorController {
+    private static final Log logger = LogFactory.getLog(CustomErrorController.class);
 
     @RequestMapping("error")
     public String customError(HttpServletRequest request, HttpServletResponse response, Model model) {
@@ -25,6 +28,7 @@ public class CustomErrorController {
         String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
         if (requestUri == null) {
             requestUri = "Unknown";
+            logger.info("Unknown URI");
         }
 
         String message = MessageFormat.format("{0} returned for {1} with message {3}",
@@ -37,10 +41,11 @@ public class CustomErrorController {
 
     private String getExceptionMessage(Throwable throwable, Integer statusCode) {
         if (throwable != null) {
-//            return Throwables.getRootCause(throwable).getMessage();/TODO RESOLVE
-            return null;
+            logger.info("Error occured " + throwable.getMessage());
+            return throwable.getMessage();
         }
         HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
+        logger.info("Error occured " + httpStatus.getReasonPhrase());
         return httpStatus.getReasonPhrase();
     }
 

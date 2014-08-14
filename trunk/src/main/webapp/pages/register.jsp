@@ -106,57 +106,6 @@
         </DIV>
         <!-- END OF REGISTRATION FORM-->
 
-        <!-- BEGIN OF REGISTRATION FORM-->
-        <%--  <DIV class="registration_block">
-             <div>
-
-                 <form:form name="regdata" modelAttribute="newUser" action="${app}/register.do"
-                            method="POST"  enctype="application/x-www-form-urlencoded">
-
-                     <div> <form:label path="login"><strong>Enter Login:</strong></form:label>
-                         <form:input path="login" name="regLogin" type="text" size="20"/>
-                     </div>
-                     <br>
-
-                     <div><label for="name"><strong>Enter Name:</strong></label>
-                         <input id="name" name="regName" type="text" size="20"/>
-                     </div>
-                     <br>
-
-                     <div><label for="password"><strong>Enter Password:</strong></label>
-                         <input id="password" name="regPass" type="password" size="20"/>
-
-                     </div>
-                     <br>
-
-                     <div><label for="passConfirm"><strong>Confirm Password:</strong></label>
-                         <input id="passConfirm" name="regPassConfirm" type="password" size="20"/>
-
-                     </div>
-                     <br>
-
-                     <div><label for="email"><strong>Enter Email:</strong></label>
-                         <input id="email" name="regEmail" type="email" size="20"/>
-
-                     </div>
-                     <br>
-
-                     <div><label for="emailConfirm"><strong>Confirm Email:</strong></label>
-                         <input id="emailConfirm" name="regEmailConfirm" type="email" size="20"/>
-
-                     </div>
-                     <br>
-                     <input type="SUBMIT" name="SUBMIT" value="Register"/>
-                 </form:form>
-                 <form name="cancel" action="${app}/login"
-                       method="GET"
-                       enctype="application/x-www-form-urlencoded">
-                     <input type="SUBMIT" name="SUBMIT" value="Cancel"/>
-                 </form>
-             </div>
-         </DIV>--%>
-        <!-- END OF REGISTRATION FORM-->
-
     </DIV>
     <!--END OF CENTRAL BLOCK-->
 

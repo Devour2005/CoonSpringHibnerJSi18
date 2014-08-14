@@ -9,8 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimeCountAspect {
 
-//    @Around("execution(* com.springapp.Calculation.PiCalculator.calculMethod(..))")
-    @Around("execution(* com.springapp.Calculation.PiCalculator.call(..))")
+    @Around("execution(* com.springapp.Calculation.CalculatorController.calculMethod(..))")
     public Object timeCounterClass(ProceedingJoinPoint joinpoint) {
         Object result = null;
         try {

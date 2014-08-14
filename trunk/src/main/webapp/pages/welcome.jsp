@@ -108,18 +108,6 @@
 
         <div>
 
-
-
-            <%-- <div class="redaction_block">
-                 <form name="listUsers" action="${app}administration"
-                 &lt;%&ndash;<form name="listUsers" action="${app}/viewall"&ndash;%&gt;
-                       method="GET">
-                     &lt;%&ndash;enctype="application/x-www-form-urlencoded">&ndash;%&gt;
-                     &lt;%&ndash;<input type=hidden name="action" value="listUser"/>&ndash;%&gt;
-                     <input type="SUBMIT" name="SUBMIT" value="View All"/>
-                 </form>
-             </div>--%>
-
         </div>
     </DIV>
     <!--END OF CENTRAL BLOCK-->
