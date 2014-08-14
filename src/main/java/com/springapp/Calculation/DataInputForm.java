@@ -8,7 +8,6 @@ public class DataInputForm implements Serializable {
     private static final long serialVersionUID = 13456L;
 
     @NotBlank
-//    private String precision="50";
     private String precision;
 
     @NotBlank

@@ -36,44 +36,31 @@ public class MainController {
     @Autowired
     private ComputerService computerService;
 
-        @RequestMapping(value = "welcome")
-        public String userWelcomePage(ModelMap model, Principal principal, HttpSession session) {
-            Authentication authentication = SecurityContextHolder.getContext()
-                    .getAuthentication();
-            String role = String.valueOf(authentication.getAuthorities());
-            String login = authentication.getName();
-            User user = userService.getUserByLogin(login);
-            session.setAttribute("user", user);
-            model.addAttribute("role", role);
-            model.addAttribute("user", user);
-            if (!role.contains("admin")) {
-                logger.info("Role 'User' - Go to Welcome Page");
-                return "welcome";
-            } else {
-                model.addAttribute("computers", computerService.getAllComputers());
-                model.addAttribute("members", userService.getAllUsers());
-                logger.info("Role 'Admin' - Go to Admin Page");
-                return "administration";
-    //            return "redirect:/adminPage";
-            }
+    @RequestMapping(value = "welcome")
+    public String userWelcomePage(ModelMap model, Principal principal, HttpSession session) {
+        Authentication authentication = SecurityContextHolder.getContext()
+                .getAuthentication();
+        String role = String.valueOf(authentication.getAuthorities());
+        String login = authentication.getName();
+        User user = userService.getUserByLogin(login);
+        session.setAttribute("user", user);
+        model.addAttribute("role", role);
+        model.addAttribute("user", user);
+        if (!role.contains("admin")) {
+            logger.info("Role 'User' - Go to Welcome Page");
+            return "welcome";
+        } else {
+            model.addAttribute("computers", computerService.getAllComputers());
+            model.addAttribute("members", userService.getAllUsers());
+            logger.info("Role 'Admin' - Go to Admin Page");
+            return "administration";
         }
+    }
 
     @RequestMapping(value = {"/", "login", "/login"}, method = RequestMethod.GET)
     public String loginPage() {
         return "login";
     }
-
-  /* @RequestMapping(value = {"/", "index", "/index"}, method = RequestMethod.GET)
-    public String indexPage() {
-        logger.info("Go to Welcome page");
-        return "index";
-    }*/
-
-  /*   @RequestMapping(value = "welcome")
-    public String userWelcomePage() {
-        logger.info("Go to Welcome page");
-        return "welcome";
-    }*/
 
     @Secured("admin")
     @RequestMapping(value = "adminPage", method = RequestMethod.GET)

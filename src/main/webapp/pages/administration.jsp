@@ -52,14 +52,6 @@
 
         </div>
 
-        <%-- <div>
-             <form name="listUsers" action="/admin.do"
-                   method="GET"
-                   enctype="application/x-www-form-urlencoded">
-                 <input type=hidden name="action" value="listUser"/>
-                 <input type="SUBMIT" name="SUBMIT" value="View All"/>
-             </form>
-         </div>--%>
 
         <!--BEGIN OF USERS TABLE-->
         <div align="center">

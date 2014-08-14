@@ -87,13 +87,7 @@
                 </tbody>
             </table>
 
-            <%--action="${app}/adminEdit.do/${user.userId}&${comp.pcName}"--%>
-            <%--/${computer.pcName}--%>
 
-            <%--${startTimeList[param.startTime]}--%>
-
-            <%--action="${app}/adminEdit.do/${user.userId}/${comp.compId}"--%>
-            <%--action="${app}/adminEdit.do/${user.userId}"--%>
             <!--BEGIN OF REDACTION FORM-->
             <DIV class="admin_redaction_block">
                 <sf:form name="adminUserUpdate"

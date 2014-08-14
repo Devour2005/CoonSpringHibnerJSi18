@@ -21,24 +21,16 @@ public class CalculationValidator implements Validator {
 //        ValidationUtils.
         DataInputForm dataInputForm = (DataInputForm) target;
 
-        if ((!dataInputForm.getPrecision().isEmpty()
-                && !dataInputForm.getPrecision().matches("^([0-9])+$"))) {
+        if ((!dataInputForm.getPrecision().isEmpty())
+                && ((!dataInputForm.getPrecision().matches("^([0-9])+$")
+                || (Integer.valueOf(dataInputForm.getPrecision()) <= 0)))) {
             errors.rejectValue("precision", "precision.match");
         }
-        if ((!dataInputForm.getPrecision().isEmpty()
-                && Integer.valueOf(dataInputForm.getPrecision()) <= 0)) {
-            errors.rejectValue("precision", "precision.match");
-        }
-
-        if ((!dataInputForm.getNumberOfThreads().isEmpty()
-                && !dataInputForm.getNumberOfThreads().matches("^([0-9])+$"))) {
+        if ((!dataInputForm.getNumberOfThreads().isEmpty())
+                && ((!dataInputForm.getNumberOfThreads().matches("^([0-9])+$"))
+                || (Integer.valueOf(dataInputForm.getNumberOfThreads()) <= 0))) {
             errors.rejectValue("numberOfThreads", "numberOfThreads.match");
         }
-        if ((!dataInputForm.getNumberOfThreads().isEmpty()
-                && Integer.valueOf(dataInputForm.getNumberOfThreads()) <= 0)) {
-            errors.rejectValue("numberOfThreads", "numberOfThreads.match");
-        }
-
     }
 }
 

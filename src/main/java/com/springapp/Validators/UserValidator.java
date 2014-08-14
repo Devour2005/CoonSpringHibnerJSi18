@@ -41,28 +41,10 @@ public class UserValidator implements Validator {
                         "@(([a-zA-Z0-9-])+\\.)+([a-zA-Z0-9]{2,4})+$"))) {
             errors.rejectValue("email", "email.match");
         }
-       /* if (!userRegister.getEmail().contains("@")) {
-            errors.rejectValue("email", "email.correct");
-        }*/
         if ((!userRegisterReg.getEmail().equalsIgnoreCase(userRegisterReg.getEmailConfirm())) &&
                 (!userRegisterReg.getEmailConfirm().isEmpty())) {
             errors.rejectValue("emailConfirm", "email.again");
         }
-
-
-        /*//Update Validation
-        if ((!userRegisterUpdt.getLogin().isEmpty()) && (!userRegisterUpdt.getLogin().matches("^([a-zA-Z0-9_-])+$"))) {
-            errors.rejectValue("login", "login.match");
-        }
-
-        if ((!userRegisterUpdt.getName().isEmpty()) && (!userRegisterUpdt.getName().matches("^([a-zA-Z])+$"))) {
-            errors.rejectValue("name", "name.match");
-        }
-        if ((!userRegisterUpdt.getEmail().isEmpty()) &&
-                (!userRegisterUpdt.getEmail().matches("^([a-zA-Z0-9_\\.\\-+])+" +
-                        "@(([a-zA-Z0-9-])+\\.)+([a-zA-Z0-9]{2,4})+$"))) {
-            errors.rejectValue("email", "email.match");
-        }*/
     }
 }
 
