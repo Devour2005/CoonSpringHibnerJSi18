@@ -69,7 +69,7 @@ public class CalculatorController implements Callable<BigDecimal>, IParallelPiEx
         BigDecimal result = call();
         model.addAttribute("result", result);
         model.addAttribute("precision", dataInputForm.getPrecision());
-        model.addAttribute("elapsedTime", dataInputForm.getElapsedTime());
+        model.addAttribute("elapsedTime", elapsedTime);
         model.addAttribute("numberOfThreads", dataInputForm.getNumberOfThreads());
         return "calculResults";
     }
@@ -107,12 +107,12 @@ public class CalculatorController implements Callable<BigDecimal>, IParallelPiEx
             elapsedTime = (t1 - t0) / 1_000_000;
 
             logger.info("End with time = " + elapsedTime);
-//            System.out.println("End with time = " + elapsedTime);
             logger.info("End of calculation!");
             es.shutdown();
         }
         return sum;
     }
+
 }
 
 

@@ -22,9 +22,9 @@
         <security:intercept-url pattern="/edit" access="hasAnyRole('admin', 'user')"/>
         <security:intercept-url pattern="/editUser" access="hasRole('admin')"/>
         <security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')"/>
-        <security:intercept-url pattern="/calculation" access="hasAnyRole('admin', 'user')"/>
-        <security:intercept-url pattern="/calculResults" access="hasAnyRole('admin', 'user')"/>
-        <security:intercept-url pattern="/calculatePage" access="hasAnyRole('admin', 'user')"/>
+        <!--<security:intercept-url pattern="/calculation" access="hasAnyRole('admin', 'user')"/>-->
+        <!--<security:intercept-url pattern="/calculResults" access="hasAnyRole('admin', 'user')"/>-->
+        <!--<security:intercept-url pattern="/calculatePage" access="hasAnyRole('admin', 'user')"/>-->
 
         <security:logout logout-success-url="/login"/>
     </security:http>
