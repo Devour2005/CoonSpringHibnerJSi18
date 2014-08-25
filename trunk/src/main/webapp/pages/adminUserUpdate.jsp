@@ -33,10 +33,13 @@
         <div class="user_info">
             <br> To Do:
             <p class="error">
-                1. Pc "Delete" option doesn't work yet!<br>
+                1. Doesn't Update correctly ANY user<br>
+                from list. Only authorized one.<br>
                 <br>
-                2. Doesn't Update correctly ANY user<br>
-                from list. Only authorized one.
+
+                2. After assingning several computers <br>
+                User dublicates as many times as many<br>
+                computers have been assingned.<br>
             </p>
 
         </div>

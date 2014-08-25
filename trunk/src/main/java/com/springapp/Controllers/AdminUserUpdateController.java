@@ -73,6 +73,8 @@ public class AdminUserUpdateController {
                 }
                 if (element instanceof String && ((String) element).equals("Delete")) {
                     computerSet.clear();
+//                    UserForm userForm = new UserForm();
+//                    userForm.setComputers(computerSet);
                     new UserForm().setComputers(computerSet);
                 }
                 return pcName != null ? computerService.getComputerByName(pcName) : null;

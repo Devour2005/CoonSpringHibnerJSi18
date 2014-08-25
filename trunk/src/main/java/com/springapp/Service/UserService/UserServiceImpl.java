@@ -76,4 +76,4 @@ public class UserServiceImpl implements UserService {
     public boolean emailExistanseCheck(User user) {
         return userDao.isEmailExists(user);
     }
-}
+   }
