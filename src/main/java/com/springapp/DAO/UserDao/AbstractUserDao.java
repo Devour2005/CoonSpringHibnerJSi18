@@ -35,4 +35,5 @@ abstract class AbstractUserDao implements UserDao, Serializable {
     abstract public boolean isUserExists(User user);
 
     abstract public boolean isEmailExists(User user);
+
 }

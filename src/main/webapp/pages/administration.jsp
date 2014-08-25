@@ -80,7 +80,6 @@
                     <td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regDate}"/></td>
                     <td>
 
-
                         <c:choose>
                             <c:when test="${user.computers!= null && !user.computers['empty']}">
                                 <c:forEach items="${user.computers}" var="comp">

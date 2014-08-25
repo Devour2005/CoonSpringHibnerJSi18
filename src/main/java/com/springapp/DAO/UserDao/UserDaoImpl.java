@@ -188,7 +188,6 @@ public class UserDaoImpl extends AbstractUserDao {
         User user = getUserByLogin(login);
         return user.getComputers();
     }
-
 }
 
 

@@ -52,7 +52,7 @@ CREATE TABLE computers (
 USE coonportalsprng;
 CREATE TABLE usercomp (
   user_id INT(11) NOT NULL,
-  comp_id INT(11) NOT NULL,
+  comp_id INT(11) /*NOT NULL*/,
   INDEX fk_user_id (user_id),
   INDEX fk_comp_id (comp_id),
   CONSTRAINT fk_user_id FOREIGN KEY (user_id)
