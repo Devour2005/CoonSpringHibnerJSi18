@@ -8,7 +8,6 @@ import com.springapp.Service.RoleService.RoleService;
 import com.springapp.Service.UserService.UserService;
 import com.springapp.Validators.UpdateValidator;
 import com.springapp.mvc.UserForm;
-import org.apache.commons.collections.ListUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,9 +20,9 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Controller
 public class AdminUserUpdateController {
@@ -86,8 +85,9 @@ public class AdminUserUpdateController {
     public String updateView(@PathVariable("userId") Integer userId,
                              UserForm userForm,
                              ModelMap model) {
-//        User user = userService.getUserById(userId);
-        userForm.setUser(userService.getUserById(userId));
+        User userForUpdate = userService.getUserById(userId);
+        userForm.setUser(userForUpdate);
+        model.addAttribute("userForUpdate", userForUpdate);
         model.addAttribute("userForm", userForm);
         model.addAttribute("computers", computerService.getAllComputers());
         logger.info("Go to Admin's User update Page");
@@ -96,10 +96,11 @@ public class AdminUserUpdateController {
 
     @RequestMapping(value = "adminEdit.do/{userId}", method = RequestMethod.POST)
     public ModelAndView updateUserProcess(@ModelAttribute(value = "userForm")
-                                          UserForm userForm,
                                           @PathVariable("userId") Integer userId,
+                                          UserForm userForm,
                                           BindingResult result, Model model) {
-        User user = userService.getUserById(userId);
+//        User userForUpdate = userService.getUserById(userUpdateId);
+        User userForUpdate = userService.getUserById(userId);
         model.addAttribute("computers", computerService.getAllComputers());
         model.addAttribute("userForm", userForm);
         updateValidator.validate(userForm, result);
@@ -108,29 +109,25 @@ public class AdminUserUpdateController {
             logger.error("Validation error");
             return new ModelAndView("adminUserUpdate");
         }
-//        return updatingUser(user, model, userForm, computer);
-        return updatingUser(user, model, userForm);
+//        return updatingUser(userForUpdate, model, userForm, computer);
+        return updatingUser(userForUpdate, model, userForm);
     }
 
-    /*    private ModelAndView updatingUser(User user, Model model,
-                                          UserForm userForm, Set<Computer> computer) { */
-    private ModelAndView updatingUser(User user, Model model,
+    private ModelAndView updatingUser(User userForUpdate, Model model,
                                       UserForm userForm) {
-        if (isEmailExists(userForm, user)) {
+        if (isEmailExists(userForm, userForUpdate)) {
             logger.error("Can't update user - not unique email!!");
             model.addAttribute("errorMsg", "Email is already in use!");
             return new ModelAndView("adminUserUpdate");
         }
-//        fillForm(userForm, user, computer);
-        fillForm(userForm, user);
-        user = userForm.getUser();
-        userService.updateUser(user);
+//        fillForm(userForm, userForUpdate, computer);
+        fillForm(userForm, userForUpdate);
+        userForUpdate = userForm.getUser();
+        userService.updateUser(userForUpdate);
         logger.info("User " + userForm.getLogin() + " is updated by Admin!");
-//        return new ModelAndView("redirect:/adminPage", "user", user);
         return new ModelAndView("redirect:/adminPage");
     }
 
-    //    private void fillForm(UserForm userForm, User user, Set<Computer> computer) {
     private void fillForm(UserForm userForm, User user) {
         userForm.setUserId(user.getUserId());
         userForm.setLogin(user.getLogin());
@@ -140,11 +137,11 @@ public class AdminUserUpdateController {
     }
 
     /**
-     * Compares if Email in the userFrom is the same as authorized user's
-     * and such user exists in the DataBase it returns true.
+     * Compares if Email in the userFrom is the same as authorized userForUpdate's
+     * and such userForUpdate exists in the DataBase it returns true.
      *
      * @param userForm    the form from JSP with entered data;
-     * @param currentUser the authorized user whose data is updating;
+     * @param currentUser the authorized userForUpdate whose data is updating;
      */
 
     private boolean isEmailExists(UserForm userForm, User currentUser) {

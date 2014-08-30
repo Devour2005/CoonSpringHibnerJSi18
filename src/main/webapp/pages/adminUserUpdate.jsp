@@ -33,11 +33,8 @@
         <div class="user_info">
             <br> To Do:
             <p class="error">
-                1. Doesn't Update correctly ANY user<br>
-                from list. Only authorized one.<br>
-                <br>
 
-                2. After assingning several computers <br>
+                1. After assingning several computers <br>
                 User dublicates as many times as many<br>
                 computers have been assingned.<br>
             </p>
@@ -67,16 +64,16 @@
                 </thead>
 
                 <tbody align="center">
-                <td><c:out value="${user.userId}"/></td>
-                <td><c:out value="${user.login}"/></td>
-                <td><c:out value="${user.name}"/></td>
-                <td><c:out value="${user.password}"/></td>
-                <td><c:out value="${user.email}"/></td>
-                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regDate}"/></td>
+                <td><c:out value="${userForUpdate.userId}"/></td>
+                <td><c:out value="${userForUpdate.login}"/></td>
+                <td><c:out value="${userForUpdate.name}"/></td>
+                <td><c:out value="${userForUpdate.password}"/></td>
+                <td><c:out value="${userForUpdate.email}"/></td>
+                <td><fmt:formatDate pattern="yyyy-MM-dd" value="${userForUpdate.regDate}"/></td>
                 <td>
                     <c:choose>
-                        <c:when test="${user.computers!= null && !user.computers['empty']}">
-                            <c:forEach items="${user.computers}" var="comp">
+                        <c:when test="${userForUpdate.computers!= null && !userForUpdate.computers['empty']}">
+                            <c:forEach items="${userForUpdate.computers}" var="comp">
                                 <c:out value="${comp.pcName}"/>
                             </c:forEach>
                         </c:when>
@@ -96,7 +93,7 @@
                 <sf:form name="adminUserUpdate"
                          method="POST"
                          modelAttribute="userForm"
-                         action="${app}/adminEdit.do/${user.userId}"
+                         action="${app}/adminEdit.do/${userForUpdate.userId}"
                          enctype="application/x-www-form-urlencoded">
 
                     <c:if test="${not empty errorMsg}">
@@ -127,8 +124,8 @@
                     <h3 class="h3">
                         <td>
                             <c:choose>
-                                <c:when test="${user.computers!= null && !user.computers['empty']}">
-                                    <c:forEach items="${user.computers}" var="comp">
+                                <c:when test="${userForUpdate.computers!= null && !userForUpdate.computers['empty']}">
+                                    <c:forEach items="${userForUpdate.computers}" var="comp">
                                         <c:out value="${comp.pcName}"/>
                                     </c:forEach>
                                 </c:when>

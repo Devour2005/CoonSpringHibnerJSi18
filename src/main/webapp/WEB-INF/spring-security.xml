@@ -22,9 +22,9 @@
         <security:intercept-url pattern="/edit" access="hasAnyRole('admin', 'user')"/>
         <security:intercept-url pattern="/editUser" access="hasRole('admin')"/>
         <security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')"/>
-        <!--<security:intercept-url pattern="/calculation" access="hasAnyRole('admin', 'user')"/>-->
-        <!--<security:intercept-url pattern="/calculResults" access="hasAnyRole('admin', 'user')"/>-->
-        <!--<security:intercept-url pattern="/calculatePage" access="hasAnyRole('admin', 'user')"/>-->
+        <!--<security:intercept-url pattern="/calculation" access="hasAnyRole('admin', 'userForUpdate')"/>-->
+        <!--<security:intercept-url pattern="/calculResults" access="hasAnyRole('admin', 'userForUpdate')"/>-->
+        <!--<security:intercept-url pattern="/calculatePage" access="hasAnyRole('admin', 'userForUpdate')"/>-->
 
         <security:logout logout-success-url="/login"/>
     </security:http>
@@ -36,7 +36,7 @@
         </security:authentication-provider>
 
         <!--    <security:authentication-provider>
-                <security:jdbc-user-service
+                <security:jdbc-userForUpdate-service
                         data-source-ref="dataSource"
                         users-by-username-query="select LOGIN, PASSWORD, enabled from members where LOGIN = ?"
 
