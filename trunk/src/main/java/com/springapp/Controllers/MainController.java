@@ -64,10 +64,11 @@ public class MainController {
 
     @Secured("admin")
     @RequestMapping(value = "adminPage", method = RequestMethod.GET)
-    private ModelAndView adminPage(Model model) {
+    private String adminPage(Model model) {
         logger.info("Go to Admin Page!");
-        model.addAttribute("computers", computerService.getAllComputers());
-        return new ModelAndView("administration", "members", userService.getAllUsers());
+//        model.addAttribute("computers", computerService.getAllComputers());  //FOR VIEWING COMPUTERS IN THE TABLE
+        model.addAttribute("members", userService.getAllUsers());
+        return "administration";
     }
 
     @Secured("admin")
