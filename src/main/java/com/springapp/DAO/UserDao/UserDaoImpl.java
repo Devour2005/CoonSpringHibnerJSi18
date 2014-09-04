@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -171,11 +172,22 @@ public class UserDaoImpl extends AbstractUserDao {
                 .add(Restrictions.eq("userId", userId)).uniqueResult();
     }
 
-    @Override
+   /* @Override
     @Transactional
     public List<User> getAllUsers() {
         return currentSession().createCriteria(User.class).list();
+    } */
+
+
+    @Override
+    @Transactional
+    public List<User> getAllUsers() {
+        Session session = HibernateUtil.openSession();
+        return session.createQuery("from User").list();
     }
+
+
+
 
     @Override
     @Transactional

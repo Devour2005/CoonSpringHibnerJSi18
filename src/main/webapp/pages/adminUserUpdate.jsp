@@ -31,13 +31,7 @@
     <!--LEFT BLOCK-->
     <DIV class="content_left">
         <div class="user_info">
-            <br> To Do:
-            <p class="error">
-
-                1. After assingning several computers <br>
-                User dublicates as many times as many<br>
-                computers have been assingned.<br>
-            </p>
+           
 
         </div>
     </DIV>
