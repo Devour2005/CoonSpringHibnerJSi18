@@ -37,6 +37,9 @@ public class Computer implements Serializable {
     @Column(name = "cpu")
     private String cpu;
 
+    public Computer() {
+    }
+
     @SuppressWarnings("unchecked")
     @ManyToMany(mappedBy = "computers",
             fetch = FetchType.EAGER/*, cascade = CascadeType.ALL*/)
@@ -50,9 +53,6 @@ public class Computer implements Serializable {
         this.user = user;
     }
 
-
-    public Computer() {
-    }
 
     public Integer getCompId() {
         return compId;

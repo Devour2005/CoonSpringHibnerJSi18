@@ -134,7 +134,7 @@
             <tr>
 
                 <c:forEach items="${computers}" var="computer">
-                <td><c:out value="${computer.compId}"/></td>
+                <td><c:out value="${computer.compId}" /></td>
                 <td><c:out value="${computer.pcName}"/></td>
             </tr>
             </c:forEach>

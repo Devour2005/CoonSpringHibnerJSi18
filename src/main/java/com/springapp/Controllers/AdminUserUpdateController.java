@@ -20,7 +20,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpSession;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -97,19 +96,19 @@ public class AdminUserUpdateController {
     @RequestMapping(value = "adminEdit.do/{userId}", method = RequestMethod.POST)
     public ModelAndView updateUserProcess(@ModelAttribute(value = "userForm")
                                           @PathVariable("userId") Integer userId,
+                                          Model model,
                                           UserForm userForm,
-                                          BindingResult result, Model model) {
-//        User userForUpdate = userService.getUserById(userUpdateId);
+                                          BindingResult result) {
         User userForUpdate = userService.getUserById(userId);
-        model.addAttribute("computers", computerService.getAllComputers());
         model.addAttribute("userForm", userForm);
+        model.addAttribute("computers", computerService.getAllComputers());
         updateValidator.validate(userForm, result);
 
         if (result.hasErrors()) {
-            logger.error("Validation error");
+            logger.error("Validation error while updating User - " + userForm.getLogin());
+            model.addAttribute("userForUpdate", userForUpdate);
             return new ModelAndView("adminUserUpdate");
         }
-//        return updatingUser(userForUpdate, model, userForm, computer);
         return updatingUser(userForUpdate, model, userForm);
     }
 
@@ -120,7 +119,6 @@ public class AdminUserUpdateController {
             model.addAttribute("errorMsg", "Email is already in use!");
             return new ModelAndView("adminUserUpdate");
         }
-//        fillForm(userForm, userForUpdate, computer);
         fillForm(userForm, userForUpdate);
         userForUpdate = userForm.getUser();
         userService.updateUser(userForUpdate);
@@ -132,7 +130,6 @@ public class AdminUserUpdateController {
         userForm.setUserId(user.getUserId());
         userForm.setLogin(user.getLogin());
         userForm.setRegDate(user.getRegDate());
-//        userForm.setComputers(computer);
         userForm.setRole(roleService.findByName(user.getRole().getRoleName()));
     }
 
