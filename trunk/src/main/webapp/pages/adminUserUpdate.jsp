@@ -30,10 +30,7 @@
 
     <!--LEFT BLOCK-->
     <DIV class="content_left">
-        <div class="user_info">
-           
 
-        </div>
     </DIV>
     <!--END OF LEFT BLOCK-->
 

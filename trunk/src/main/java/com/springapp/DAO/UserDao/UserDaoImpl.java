@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -117,7 +118,7 @@ public class UserDaoImpl extends AbstractUserDao {
 
     @Override
     @Transactional
-    public User authorization(String login, String password) throws LoginException{
+    public User authorization(String login, String password) throws LoginException {
         User user = getUserByLogin(login);
         if (user != null && user.getLogin().equals(login) && user.getPassword().equals(password)) {
             return user;
@@ -172,11 +173,24 @@ public class UserDaoImpl extends AbstractUserDao {
                 .add(Restrictions.eq("userId", userId)).uniqueResult();
     }
 
+ /*   @Override
+    @Transactional
+    public List<User> getAllUsers() {
+        List<User> userList;  //= currentSession().createCriteria(User.class).list();
+        Criteria criteria = currentSession().createCriteria(User.class);
+        userList = criteria.list();
+        Iterator iterator = userList.iterator();
+        while (iterator.hasNext()){
+             iterator.next();
+        }
+        return userList;
+    }
+*/
    /* @Override
     @Transactional
     public List<User> getAllUsers() {
         return currentSession().createCriteria(User.class).list();
-    } */
+    }*/
 
 
     @Override
@@ -185,8 +199,6 @@ public class UserDaoImpl extends AbstractUserDao {
         Session session = HibernateUtil.openSession();
         return session.createQuery("from User").list();
     }
-
-
 
 
     @Override
