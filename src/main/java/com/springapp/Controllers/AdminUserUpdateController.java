@@ -101,12 +101,13 @@ public class AdminUserUpdateController {
                                           BindingResult result) {
         User userForUpdate = userService.getUserById(userId);
         model.addAttribute("userForm", userForm);
+        model.addAttribute("userForUpdate", userForUpdate);
         model.addAttribute("computers", computerService.getAllComputers());
         updateValidator.validate(userForm, result);
 
         if (result.hasErrors()) {
             logger.error("Validation error while updating User - " + userForm.getLogin());
-            model.addAttribute("userForUpdate", userForUpdate);
+
             return new ModelAndView("adminUserUpdate");
         }
         return updatingUser(userForUpdate, model, userForm);
