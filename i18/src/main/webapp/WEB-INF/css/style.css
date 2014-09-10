@@ -1,0 +1,228 @@
+/*задаем для тела страницы отступы, цвет, шрифт */
+body {
+    padding: 0;
+    margin: 0;
+    font: bold 14px verdana, arial, helvetica;
+    color: black; /*цвет текса страницы */
+}
+
+p {
+    font: bold 14px verdana, arial, helvetica;
+}
+
+/*создаем шапку сайта*/
+#header {
+    width: 94%; /* ширина блока*/
+    height: 9%; /*фиксированная высота блока*/
+    padding: 8px; /*внутренние отступы с 4х сторон */
+    margin: 0px 0px auto 35px; /*внешние отступы блока, в данном случае сверху и снизу*/
+    line-height: 5px; /*расстояние между строк*/
+    text-align: center;
+    color: white; /*цвет текста страницы*/
+    /*background: #66CCFF;*/
+    background: black;
+}
+
+/*описание основного блока на главной стр*/
+#content {
+    width: 95%;
+    height: 80%;
+    color: black;
+    text-align: center;
+    margin: 0px 0px auto 35px;
+    /*line-height: 5px;*/
+}
+
+/*конец  описания основного блока на главной стр*/
+
+#footer {
+    width: 95%;
+    height: 9%;
+    margin: 0px 35px auto;
+    padding: 0px;
+    /* line-height: 5px; *//*расстояние между строк*/
+    text-align: center;
+    /*background: #66CCFF;*/
+    background: black;
+    color: white;
+}
+
+#navigation li {
+    font: 18px helvetica, "microsoft sans sereif", arial;
+    text-decoration: none;
+    text-align: center;
+    color: #ff0000;
+    display: block; /*убираем точки списка*/
+    height: 20px; /*высота разделителя*/
+    width: 145px; /*ширина меню*/
+    /*float: left;*/
+    background: #cfcfcf;
+    border-right: 5px solid #ff0000; /*граница между кнопками*/
+    margin: 0px auto 5px 5px;
+    /*margin: 0px 0px 5px 5px 5px;*/
+    padding: 5px;
+    float: left;
+
+}
+
+/*ОПИСАНИЕ ОСНОВНОГО БЛОКА НА СТР КОНТАКТЫ*/
+#CONTENT_C {
+    width: 75%;
+    border: 0px solid #FF0000; /*граница */
+    color: black;
+    margin: 80px 0px 0px 30px;
+    padding: 10px;
+    height: 450px;
+    font: bold 16px "microsoft sans sereif", Verdana, arial, helvetica;
+    line-height: 20px;
+    text-align: center;
+}
+
+/*КОНЕЦ  ОПИСАНИЯ ОСНОВНОГО БЛОКА КОНТАКТЫ*/
+
+.content_left {
+    background: #ffe4b5;
+    width: 19%;
+    border-right: 1px solid red; /*граница */
+    border: 1px black; /*граница */
+    color: black; /*цвет текста страницы */
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    line-height: 10px;
+    float: left;
+}
+
+.content_center {
+    background: #e6e6fa;
+    width: 63%;
+    border: 1px black; /*граница */
+    color: black; /*цвет текста страницы */
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    line-height: 30px;
+    float: left;
+    text-align: center;
+}
+
+.content_right {
+    background: #cfcfcf;
+    width: 18%;
+    border: 1px black; /*граница */
+    color: black; /*цвет текста страницы */
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    line-height: 10px;
+    float: left;
+}
+
+.content_admin {
+    background: #e6e6fa;
+    width: 100%;
+    border: 1px black; /*граница */
+    color: black; /*цвет текста страницы */
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    line-height: 30px;
+    float: left;
+    text-align: center;
+}
+
+.calculation_block {
+    color: black; /*цвет текста страницы */
+    border: 1px solid black; /*граница */
+    margin: 30px 30px auto 45px;
+    padding: 20px;
+    float: left;
+    line-height: 25px;
+    text-align: left;
+}
+
+.no_such_user_block {
+    color: black; /*цвет текста страницы */
+    margin: 30px 30px auto 45px;
+    padding: 20px;
+    float: left;
+    line-height: 25px;
+    text-align: center;
+}
+
+.profile_block {
+    color: #4B0082; /*цвет текста страницы */
+    margin: 0px 50px auto 230px;
+    padding: 5px;
+    float: left;
+    line-height: 15px;
+    text-align: center;
+}
+
+.redaction_block {
+    color: black; /*цвет текста страницы */
+    border: 1px solid black; /*граница */
+    margin: 15px 15px auto 35px;
+    padding: 15px;
+    float: left;
+    line-height: 20px;
+    text-align: left;
+}
+
+.admin_redaction_block {
+    color: black; /*цвет текста страницы */
+    border: 1px solid black; /*граница */
+    margin: 50px 15px auto 225px;
+    /*margin: 50px auto  auto auto ;*/
+    padding: 15px;
+    float: left;
+    line-height: 20px;
+    text-align: left;
+}
+
+.registration_block {
+    color: black; /*цвет текста страницы */
+    border: 1px solid black; /*граница */
+    margin: 30px 30px auto 45px;
+    padding: 20px;
+    float: left;
+    line-height: 25px;
+    text-align: left;
+}
+
+.user_info {
+    background: #cfcfcf;
+    color: black; /*цвет текста страницы */
+    border: 1px solid black; /*граница */
+    margin: 20px;
+    padding: 20px;
+    float: right;
+    line-height: 15px; /*расстояние между строк*/
+    text-align: center;
+}
+
+.space_between_buttons {
+    line-height: 15px;
+}
+
+.description {
+    font: bold 16px verdana, arial, helvetica;
+    text-align: left;
+    padding: 20px;
+    margin: 20px;
+    line-height: 20px;
+    color: #7d10ff;
+}
+
+.h3 {
+    color: #7d10ff;
+}
+
+.error {
+    font: 15px;
+    /*width: 200px;*/
+    color: #F80000;
+}
+
+
+
