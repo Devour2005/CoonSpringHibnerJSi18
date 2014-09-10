@@ -173,32 +173,19 @@ public class UserDaoImpl extends AbstractUserDao {
                 .add(Restrictions.eq("userId", userId)).uniqueResult();
     }
 
- /*   @Override
-    @Transactional
-    public List<User> getAllUsers() {
-        List<User> userList;  //= currentSession().createCriteria(User.class).list();
-        Criteria criteria = currentSession().createCriteria(User.class);
-        userList = criteria.list();
-        Iterator iterator = userList.iterator();
-        while (iterator.hasNext()){
-             iterator.next();
-        }
-        return userList;
-    }
-*/
-   /* @Override
-    @Transactional
-    public List<User> getAllUsers() {
-        return currentSession().createCriteria(User.class).list();
-    }*/
-
-
     @Override
+    @Transactional
+    public List<User> getAllUsers() {
+        Criteria criteria = currentSession().createCriteria(User.class);
+        return criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+    }
+
+   /* @Override
     @Transactional
     public List<User> getAllUsers() {
         Session session = HibernateUtil.openSession();
         return session.createQuery("from User").list();
-    }
+    }*/
 
 
     @Override

@@ -90,12 +90,8 @@ public class ComputerDaoImpl extends AbstractComputerDao {
     @Override
     @Transactional
     public Set<Computer> getAllComputers() {
-//    public List<Computer> getAllComputers(){
-//        currentSession().createCriteria(Computer.class).list();
-
-//        Set<Computer> computerSet = new HashSet<Computer>(currentSession().createCriteria(Computer.class).list());
-//        return computerSet;
-        return new HashSet<Computer>(currentSession().createCriteria(Computer.class).list());
+        Criteria criteria = currentSession().createCriteria(User.class);
+        return new HashSet<Computer>(criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list());
     }
 
 
@@ -108,8 +104,7 @@ public class ComputerDaoImpl extends AbstractComputerDao {
     @Transactional
     protected Set<User> getAllRecords(Integer compId) {
         Computer computer = getComputerById(compId);
-        Set<User> users = computer.getUser();
-        return users;
+        return computer.getUser();
     }
 
 
