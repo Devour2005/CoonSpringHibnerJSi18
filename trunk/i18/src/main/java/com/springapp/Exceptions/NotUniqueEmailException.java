@@ -1,4 +1,4 @@
-package com.springapp.Exceptions;
+package com.springapp.exceptions;
 
 public class NotUniqueEmailException extends DBException {
     public NotUniqueEmailException(String message) {

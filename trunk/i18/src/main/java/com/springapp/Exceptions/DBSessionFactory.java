@@ -1,4 +1,4 @@
-package com.springapp.Exceptions;
+package com.springapp.exceptions;
 
 
 import org.apache.commons.logging.Log;

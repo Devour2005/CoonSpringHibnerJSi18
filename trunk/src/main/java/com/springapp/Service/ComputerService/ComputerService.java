@@ -1,7 +1,7 @@
-package com.springapp.Service.ComputerService;
+package com.springapp.service.computerService;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
 
 import java.util.Set;
 

@@ -1,10 +1,9 @@
-package com.springapp.mvc;
+package com.springapp.forms;
 
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 import java.io.Serializable;
 

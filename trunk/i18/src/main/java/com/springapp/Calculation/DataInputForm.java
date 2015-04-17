@@ -1,4 +1,4 @@
-package com.springapp.Calculation;
+package com.springapp.calculation;
 
 import org.hibernate.validator.constraints.NotBlank;
 

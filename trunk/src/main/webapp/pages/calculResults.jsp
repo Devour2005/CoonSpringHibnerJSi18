@@ -1,13 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%--<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>--%>
+<%--<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>--%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <c:set var="app" value="${pageContext.request.contextPath}"/>
-<c:set var="css" value="${pageContext.request.contextPath}/style.css"/>
+
 <html>
 <head>
     <title>Coon Portal</title>
-    <link rel="stylesheet" type="text/css" href="../style.css"/>
+
+    <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="../style.css"/>--%>
+    <link rel="shortcut icon" href="${app}pictures/favicon.ico">
 </head>
 <body>
 
@@ -35,14 +38,7 @@
     <!--CENTRAL BLOCK-->
     <DIV class="content_center">
         <!--NAVIGATION MENU -->
-        <div>
-            <ul id="navigation">
-                <li class="first-link"><a href="${app}/pages/welcome.jsp" title="home">Home</a></li>
-                <li><a href="${app}/calculatePage" title="calculation">Calculation</a></li>
-                <li><a href="${app}/pages/userprofile.jsp" title="user profile">User profile</a></li>
-                <li><a href="${app}/pages/contacts.jsp" title="contacts">Contacts</a></li>
-            </ul>
-        </div>
+        <jsp:include page="menu.jsp"/>
         <!--END OF NAVIGATION MENU -->
 
 

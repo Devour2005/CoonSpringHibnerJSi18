@@ -1,11 +1,10 @@
-package com.springapp.Service.UserService;
+package com.springapp.service.userService;
 
 
-import com.springapp.DAO.UserDao.UserDao;
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Exceptions.LoginException;
-import com.springapp.Exceptions.NotUniqueEmailException;
+import com.springapp.dao.userDao.UserDao;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.exceptions.LoginException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +73,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean emailExistanseCheck(User user) {
-        return userDao.isEmailExists(user);
+        return userDao.isEmailExist(user);
     }
    }

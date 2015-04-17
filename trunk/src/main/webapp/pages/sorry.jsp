@@ -5,6 +5,7 @@
 <head>
     <title>Coon Portal</title>
     <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
+    <link rel="shortcut icon" href="${app}pictures/favicon.ico">
 </head>
 <body>
 

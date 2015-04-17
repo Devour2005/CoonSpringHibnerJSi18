@@ -1,4 +1,4 @@
-package com.springapp.Entity;
+package com.springapp.entity;
 
 
 import org.hibernate.annotations.GenericGenerator;
@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;

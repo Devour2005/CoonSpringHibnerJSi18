@@ -1,7 +1,7 @@
-package com.springapp.Service.RoleService;
+package com.springapp.service.roleService;
 
-import com.springapp.Entity.Role;
-import com.springapp.Exceptions.NotUniqueRoleNameException;
+import com.springapp.entity.Role;
+import com.springapp.exceptions.NotUniqueRoleNameException;
 
 public interface RoleService {
     abstract public void create(Role role) throws NotUniqueRoleNameException;

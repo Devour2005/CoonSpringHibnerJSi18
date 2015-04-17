@@ -1,4 +1,4 @@
-package com.springapp.Controllers;
+package com.springapp.controllers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

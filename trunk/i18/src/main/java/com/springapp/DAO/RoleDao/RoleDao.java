@@ -1,8 +1,8 @@
-package com.springapp.DAO.RoleDao;
+package com.springapp.dao.roleDao;
 
 
-import com.springapp.Entity.Role;
-import com.springapp.Exceptions.NotUniqueRoleNameException;
+import com.springapp.entity.Role;
+import com.springapp.exceptions.NotUniqueRoleNameException;
 
 public interface RoleDao {
     abstract public void create(Role role) throws NotUniqueRoleNameException/*, DBSystemException*/;

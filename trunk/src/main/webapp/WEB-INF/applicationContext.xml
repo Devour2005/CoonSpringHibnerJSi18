@@ -27,7 +27,7 @@
              class="org.springframework.dao.support.PersistenceExceptionTranslationInterceptor"/>
        <aop:config>
            <aop:advisor advice-ref="exceprionTranslationInterceptor"
-                        pointcut="execution(* com.springapp.DAO.UserDao.*(..) )"/>
+                        pointcut="execution(* com.springapp.dao.userDao.*(..) )"/>
        </aop:config>-->
 
 
@@ -36,16 +36,16 @@
     <!-- Enable AspectJ style of Spring AOP -->
     <aop:aspectj-autoproxy/>
 
-   <!--  <aop:aspectj-autoproxy proxy-target-class="true">
-         <aop:include name="timeCounterAspect" />
-     </aop:aspectj-autoproxy>-->
+    <!--  <aop:aspectj-autoproxy proxy-target-class="true">
+          <aop:include name="timeCounterAspect" />
+      </aop:aspectj-autoproxy>-->
 
-   <bean id="timeCounterAspect" class="com.springapp.Calculation.TimeCountAspect"/>
+    <bean id="timeCounterAspect" class="com.springapp.calculation.TimeCountAspect"/>
     <!--
      <aop:config>
          <aop:aspect id="timeCount" ref="timeCounterAspect">
              <aop:pointcut id="calculation" expression=
-                     "execution(* com.springapp.Calculation.PiCalculator.call(..))"/>
+                     "execution(* com.springapp.calculation.PiCalculator.call(..))"/>
              &lt;!&ndash; Совет, выполняемый и до, и после &ndash;&gt;
              <aop:around
                      pointcut-ref="calculation"
@@ -102,10 +102,10 @@
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>com.springapp.Entity.User</value>
-                <value>com.springapp.Entity.Role</value>
-                <value>com.springapp.Entity.Computer</value>
-                <value>com.springapp.Entity.UserComputer</value>
+                <value>com.springapp.entity.User</value>
+                <value>com.springapp.entity.Role</value>
+                <value>com.springapp.entity.Computer</value>
+                <value>com.springapp.entity.UserComputer</value>
             </list>
         </property>
 
@@ -134,17 +134,26 @@
 
 
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-        <property name="basename" value="messages"/>
+        <property name="basenames">
+            <list>
+                <value>classpath:messages_en</value>
+                <value>classpath:messages_ru</value>
+            </list>
+        </property>
         <property name="defaultEncoding" value="UTF-8"/>
-
+        <property name="cacheSeconds" value="1"/>
+        <!--UTF-8-->
     </bean>
 
 
-    <bean class="com.springapp.Exceptions.CustomExceptionResolver">
+
+
+    <!--C:\>native2ascii -encoding utf8 c:\source.txt c:\output.txt-->
+    <bean class="com.springapp.exceptions.CustomExceptionResolver">
         <property name="exceptionMappings">
             <map>
                 <entry key="com.springapp.exceptions.CustomExceptionResolver" value="/exceptionPages/exceptions"/>
-                <entry key="com.springapp.exceptions.TryException" value="/exceptionPages/exceptions" />
+                <entry key="com.springapp.exceptions.TryException" value="/exceptionPages/exceptions"/>
             </map>
         </property>
     </bean>
@@ -153,6 +162,10 @@
         <property name="defaultErrorView" value="/exceptionPages/exceptions"/>
     </bean>
 
-    <!--<bean name="customUserDetailsService" class="com.springapp.Service.Security.CustomUserDetailsService"/>-->
+    <!--<bean name="customUserDetailsService" class="com.springapp.service.security.CustomUserDetailsService"/>-->
+
+
+
+
 
 </beans>

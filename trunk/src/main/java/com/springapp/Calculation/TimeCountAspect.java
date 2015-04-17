@@ -1,4 +1,4 @@
-package com.springapp.Calculation;
+package com.springapp.calculation;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TimeCountAspect {
 
-    @Around("execution(* com.springapp.Calculation.CalculatorController.calculMethod(..))")
+    @Around("execution(* com.springapp.controllers.CalculatorController.calculMethod(..))")
     public Object timeCounterClass(ProceedingJoinPoint joinpoint) {
         Object result = null;
         try {
@@ -19,7 +19,7 @@ public class TimeCountAspect {
             result = joinpoint.proceed(); // Method invoke
 
             long end = System.currentTimeMillis(); // After method invoke
-            System.out.println("Calculation took " + (end - start)
+            System.out.println("calculation took " + (end - start)
                     + " milliseconds.");
         } catch (Throwable t) {
 

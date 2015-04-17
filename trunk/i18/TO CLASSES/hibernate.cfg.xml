@@ -18,10 +18,10 @@
         <property name="current_session_context_class">thread</property>
         <property name="javax.persistence.validation.mode">none</property>
 
-        <mapping class="com.springapp.Entity.User"/>
-        <mapping class="com.springapp.Entity.Role"/>
-        <mapping class="com.springapp.Entity.Computer"/>
-        <mapping class="com.springapp.Entity.UserComputer"/>
+        <mapping class="com.springapp.entity.User"/>
+        <mapping class="com.springapp.entity.Role"/>
+        <mapping class="com.springapp.entity.Computer"/>
+        <mapping class="com.springapp.entity.UserComputer"/>
 
     </session-factory>
 </hibernate-configuration>

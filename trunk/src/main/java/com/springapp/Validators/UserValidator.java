@@ -1,6 +1,6 @@
-package com.springapp.Validators;
+package com.springapp.validators;
 
-import com.springapp.mvc.RegisterForm;
+import com.springapp.forms.RegisterForm;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

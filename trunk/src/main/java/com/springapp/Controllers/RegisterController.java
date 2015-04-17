@@ -1,10 +1,10 @@
-package com.springapp.Controllers;
+package com.springapp.controllers;
 
-import com.springapp.Entity.User;
-import com.springapp.Service.RoleService.RoleService;
-import com.springapp.Service.UserService.UserService;
-import com.springapp.mvc.RegisterForm;
-import com.springapp.Validators.UserValidator;
+import com.springapp.entity.User;
+import com.springapp.service.roleService.RoleService;
+import com.springapp.service.userService.UserService;
+import com.springapp.forms.RegisterForm;
+import com.springapp.validators.UserValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,6 +14,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -26,18 +27,17 @@ public class RegisterController {
     public RegisterController() {
     }
 
-    @Qualifier("userValidator")
-    @Autowired
-    private UserValidator userValidator;
-
     public RegisterController(UserValidator userValidator) {
         this.userValidator = userValidator;
     }
 
+    @Qualifier("userValidator")
+    @Autowired
+    private UserValidator userValidator;
+
     @InitBinder("newUser")
     private void initBinder(WebDataBinder binder) {
         binder.setValidator(userValidator);
-//        binder.setValidator(new UserValidator());
     }
 
     @Qualifier("userServiceImpl")
@@ -59,14 +59,15 @@ public class RegisterController {
                                  /*@Valid*/ final RegisterForm newUser,
                                   final BindingResult result, Model model,
                                   HttpServletRequest request) {
-
         model.addAttribute("newUser", newUser);
         userValidator.validate(newUser, result);
         if (result.hasErrors()) {
             logger.error("Register validation error");
+//            return "redirect:/register";
+
             return "register";
         }
-        if (!userCreated(newUser, model)) {
+        if (!userCreated(newUser)) {
             logger.error("New user creation error!");
             logger.error("Login or Email is already in use!");
             model.addAttribute("errorMsg", "Login or Email is already in use!");
@@ -77,7 +78,7 @@ public class RegisterController {
         return "thankForReg";
     }
 
-    private boolean userCreated(RegisterForm newUser, Model model) {
+    private boolean userCreated(RegisterForm newUser) {
         User user = newUser.getUser();
         user.setRole(roleService.findByName(newUser.getRole()));
         return userService.insertUser(user);

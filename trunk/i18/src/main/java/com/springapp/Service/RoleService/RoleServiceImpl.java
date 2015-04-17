@@ -1,8 +1,8 @@
-package com.springapp.Service.RoleService;
+package com.springapp.service.roleService;
 
-import com.springapp.DAO.RoleDao.RoleDao;
-import com.springapp.Entity.Role;
-import com.springapp.Exceptions.NotUniqueRoleNameException;
+import com.springapp.dao.roleDao.RoleDao;
+import com.springapp.entity.Role;
+import com.springapp.exceptions.NotUniqueRoleNameException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

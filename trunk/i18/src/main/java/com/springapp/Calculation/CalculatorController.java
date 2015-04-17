@@ -1,6 +1,6 @@
-package com.springapp.Calculation;
+package com.springapp.calculation;
 
-import com.springapp.Validators.CalculationValidator;
+import com.springapp.validators.CalculationValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -61,7 +61,7 @@ public class CalculatorController implements Callable<BigDecimal>, IParallelPiEx
                                Model model) throws Exception {
         calculationValidator.validate(dataInputForm, bindingResult);
         if (bindingResult.hasErrors()) {
-            logger.error("Calculation validation error");
+            logger.error("calculation validation error");
             return "calculation";
         }
         precision = Integer.valueOf(dataInputForm.getPrecision());

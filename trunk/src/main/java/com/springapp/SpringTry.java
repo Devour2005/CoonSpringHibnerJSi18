@@ -4,12 +4,12 @@
 /*
 package com.springapp;
 
-import com.springapp.Entity.Role;
-import com.springapp.Entity.User;
-import com.springapp.Service.ComputerService.ComputerServiceImpl;
-import com.springapp.Service.RoleService.RoleServiceImpl;
-import com.springapp.Service.UserService.UserServiceImpl;
-import com.springapp.mvc.UserForm;
+import com.springapp.entity.Role;
+import com.springapp.entity.User;
+import com.springapp.service.computerService.ComputerServiceImpl;
+import com.springapp.service.roleService.RoleServiceImpl;
+import com.springapp.service.userService.UserServiceImpl;
+import com.springapp.forms.UserForm;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.ui.Model;

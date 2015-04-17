@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%--<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>--%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="mytag"%>
 <c:set var="app" value="${pageContext.request.contextPath}"/>
+<c:set var="css" value="${pageContext.request.contextPath}/style.css"/>
 <html>
 <head>
     <title>Coon Portal</title>
-    <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
+    <%--<link rel="stylesheet" type="text/css" href="${app}/style.css"/>--%>
+    <link rel="stylesheet" type="text/css" href="${css}"/>
+    <link rel="shortcut icon" href="${app}pictures/favicon.ico">
 </head>
 <body>
 
@@ -17,6 +21,7 @@
 
     <div align="center">
         <h2>Welcome!!!</h2>
+        <%--<h2 class="error"><spring:message code="label.welcome"/>!!!</h2>--%>
     </div>
     <br>
 </DIV>
@@ -31,11 +36,12 @@
         <!--USER INFO BLOCK-->
         <div class="user_info">
             <br>
-
-            <div align="center">
+            <mytag:table list="${user}" />
+           <%-- <div align="center">
                 <h2>User Info!</h2>
 
-                <h3>Welcome, ${user.name}!</h3>
+                <h3>Welcome, <h3 class="h3">${user.name}! </h3 class="h3">
+                </h3>
 
                 <h3>Your Login:</h3>
 
@@ -66,7 +72,7 @@
                 <h3>Your were registered: </h3>
 
                 <h3 class="h3"><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regDate}"/></h3>
-            </div>
+            </div>--%>
 
 
             <div>
@@ -84,15 +90,9 @@
 
     <!--CENTRAL BLOCK-->
     <DIV class="content_center">
+
         <!--NAVIGATION MENU -->
-        <div>
-            <ul id="navigation">
-                <li class="first-link"><a href="${app}/pages/welcome.jsp" title="home">Home</a></li>
-                <li><a href="${app}/calculatePage" title="calculation">Calculation</a></li>
-                <li><a href="${app}/pages/userprofile.jsp" title="user profile">User profile</a></li>
-                <li><a href="${app}/pages/contacts.jsp" title="contacts">Contacts</a></li>
-            </ul>
-        </div>
+        <jsp:include page="menu.jsp"/>
         <!--END OF NAVIGATION MENU -->
         <br>
 
@@ -101,7 +101,7 @@
             This is first Web-portal with registration, authorization and editing of user profile ability.<br><br>
             Tools and technologies used: <br>
             IntelliJ Idea 12-13, HeidiSQL, SublimeText 2, JavaEE, Maven, Tomcat, Servlets, JSP, JSTL, JDBC,
-            Hibernate, Spring MVC, Spring Security, mySQL, XML, HTML, CSS2.<br>
+            Hibernate, Spring MVC, Spring Security, mySQL, XML, JavaScript, HTML, CSS3.<br>
         </div>
         <!--END OF PORTAL DESCRIPTION-->
         <br>
