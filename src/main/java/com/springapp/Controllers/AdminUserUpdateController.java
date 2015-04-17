@@ -1,13 +1,13 @@
-package com.springapp.Controllers;
+package com.springapp.controllers;
 
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Service.ComputerService.ComputerService;
-import com.springapp.Service.RoleService.RoleService;
-import com.springapp.Service.UserService.UserService;
-import com.springapp.Validators.UpdateValidator;
-import com.springapp.mvc.UserForm;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.service.Support;
+import com.springapp.service.computerService.ComputerService;
+import com.springapp.service.userService.UserService;
+import com.springapp.validators.UpdateValidator;
+import com.springapp.forms.UserForm;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -44,19 +44,20 @@ public class AdminUserUpdateController {
     @Autowired
     private ComputerService computerService;
 
-    @Qualifier("roleServiceImpl")
-    @Autowired
-    private RoleService roleService;
-
     @Qualifier("updateValidator")
     @Autowired
     private UpdateValidator updateValidator;
+
+    @Qualifier("support")
+    @Autowired
+    private Support support;
 
     @InitBinder("userForm")
     private void initBinder(WebDataBinder binder) {
         binder.setValidator(updateValidator);
 
 //        binder.registerCustomEditor(Set.class, "computers", new ComputerCollector(Set.class) {
+//        });  }
         binder.registerCustomEditor(Set.class, "computers", new CustomCollectionEditor(Set.class) {
 
             @Override
@@ -71,8 +72,6 @@ public class AdminUserUpdateController {
                 }
                 if (element instanceof String && ((String) element).equals("Delete")) {
                     computerSet.clear();
-//                    UserForm userForm = new UserForm();
-//                    userForm.setComputers(computerSet);
                     new UserForm().setComputers(computerSet);
                 }
                 return pcName != null ? computerService.getComputerByName(pcName) : null;
@@ -115,38 +114,18 @@ public class AdminUserUpdateController {
 
     private ModelAndView updatingUser(User userForUpdate, Model model,
                                       UserForm userForm) {
-        if (isEmailExists(userForm, userForUpdate)) {
+        if (support.isEmailExists(userForm, userForUpdate)) {
             logger.error("Can't update user - not unique email!!");
             model.addAttribute("errorMsg", "Email is already in use!");
             return new ModelAndView("adminUserUpdate");
         }
-        fillForm(userForm, userForUpdate);
+        support.fillForm(userForm, userForUpdate);
         userForUpdate = userForm.getUser();
         userService.updateUser(userForUpdate);
         logger.info("User " + userForm.getLogin() + " is updated by Admin!");
         return new ModelAndView("redirect:/adminPage");
     }
 
-    private void fillForm(UserForm userForm, User user) {
-        userForm.setUserId(user.getUserId());
-        userForm.setLogin(user.getLogin());
-        userForm.setRegDate(user.getRegDate());
-        userForm.setRole(roleService.findByName(user.getRole().getRoleName()));
-    }
 
-    /**
-     * Compares if Email in the userFrom is the same as authorized userForUpdate's
-     * and such userForUpdate exists in the DataBase it returns true.
-     *
-     * @param userForm    the form from JSP with entered data;
-     * @param currentUser the authorized userForUpdate whose data is updating;
-     */
 
-    private boolean isEmailExists(UserForm userForm, User currentUser) {
-        String enteredEmail = userForm.getEmail();
-        User inDBaseExistingUser = userService.getUserByEmail(enteredEmail);
-        return inDBaseExistingUser != null
-                && enteredEmail.equals(inDBaseExistingUser.getEmail())
-                && !enteredEmail.equals(currentUser.getEmail());
-    }
 }

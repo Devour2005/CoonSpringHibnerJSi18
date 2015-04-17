@@ -1,4 +1,4 @@
-package com.springapp.Exceptions;
+package com.springapp.exceptions;
 
 public class DBException extends Exception {
     public DBException(String message) {

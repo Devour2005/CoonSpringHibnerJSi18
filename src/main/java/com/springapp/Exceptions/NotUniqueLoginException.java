@@ -1,4 +1,4 @@
-package com.springapp.Exceptions;
+package com.springapp.exceptions;
 
 public class NotUniqueLoginException extends DBException {
     public NotUniqueLoginException(String message) {

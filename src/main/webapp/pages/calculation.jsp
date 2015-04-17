@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page import="com.springapp.Calculation.PiCalculator" %>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="mytag"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <c:set var="app" value="${pageContext.request.contextPath}"/>
 
@@ -9,6 +8,7 @@
 <head>
     <title>Coon Portal</title>
     <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
+    <link rel="shortcut icon" href="${app}pictures/favicon.ico">
 </head>
 <body>
 
@@ -33,24 +33,8 @@
         <!--USER INFO BLOCK-->
         <div class="user_info">
             <br>
+            <mytag:table list="${user}" />
 
-            <div align="center">
-                <h2>User Info!</h2>
-
-                <h3>Welcome, ${user.name}!</h3>
-
-                <h3>Your Login:</h3>
-
-                <h3>${user.login}</h3>
-
-                <h3>Your EMail:</h3>
-
-                <h3>${user.email}</h3>
-
-                <h3>Your were registered: </h3>
-
-                <h3><fmt:formatDate pattern="yyyy-MM-dd" value="${user.regDate}"/></h3>
-            </div>
             <div>
                 <form name="logout" action="${app}/logout.do"
                       method="POST"
@@ -66,14 +50,7 @@
     <!--CENTRAL BLOCK-->
     <DIV class="content_center">
         <!--NAVIGATION MENU -->
-        <div>
-            <ul id="navigation">
-                <li class="first-link"><a href="${app}/pages/welcome.jsp" title="home">Home</a></li>
-                <li><a href="${app}/calculatePage" title="calculation">Calculation</a></li>
-                <li><a href="${app}/pages/userprofile.jsp" title="user profile">User profile</a></li>
-                <li><a href="${app}/pages/contacts.jsp" title="contacts">Contacts</a></li>
-            </ul>
-        </div>
+        <jsp:include page="menu.jsp"/>
         <!--END OF NAVIGATION MENU -->
 
         <!--CALCULATION BLOCK-->

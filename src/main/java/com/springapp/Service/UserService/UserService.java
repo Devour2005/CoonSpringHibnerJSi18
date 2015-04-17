@@ -1,10 +1,9 @@
-package com.springapp.Service.UserService;
+package com.springapp.service.userService;
 
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Exceptions.LoginException;
-import com.springapp.Exceptions.NotUniqueEmailException;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.exceptions.LoginException;
 
 import java.util.List;
 import java.util.Set;

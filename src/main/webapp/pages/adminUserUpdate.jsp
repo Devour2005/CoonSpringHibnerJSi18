@@ -10,6 +10,7 @@
 <head>
     <title>Coon Portal - Admin User Update Page</title>
     <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
+    <link rel="shortcut icon" href="${app}pictures/favicon.ico">
 </head>
 <body>
 
@@ -129,7 +130,7 @@
 
 
                     <form:label path="computers">Enter PC:</form:label> <br>
-                    <form:select multiple="true" path="computers" size="3">
+                    <form:select path="computers" multiple="true" size="3">
                         <%--<form:option value="NONE" label="<--- Select --->"/>--%>
                         <form:option value="Delete" label="Delete"/>
                         <form:options items="${computers}" itemValue="pcName" itemLabel="pcName"/>

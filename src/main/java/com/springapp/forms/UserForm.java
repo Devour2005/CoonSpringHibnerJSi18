@@ -1,22 +1,17 @@
-package com.springapp.mvc;
+package com.springapp.forms;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.Role;
-import com.springapp.Entity.User;
-import com.springapp.Service.RoleService.RoleService;
+import com.springapp.entity.Computer;
+import com.springapp.entity.Role;
+import com.springapp.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.validator.constraints.Email;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class UserForm implements Serializable  {
@@ -45,7 +40,7 @@ public class UserForm implements Serializable  {
 
     private Role role;
 
-    private Set<Computer> computers = new LinkedHashSet<Computer>();
+    private Set<Computer> computers;
 
     public UserForm() {
     }
@@ -70,8 +65,8 @@ public class UserForm implements Serializable  {
         this.name = user.getName();
         this.email = user.getEmail();
         this.regDate = user.getRegDate();
-        this.role = user.getRole();
         this.computers = user.getComputers();
+        this.role = user.getRole();
     }
 
     public Integer getUserId() {

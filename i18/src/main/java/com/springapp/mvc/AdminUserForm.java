@@ -1,8 +1,8 @@
-package com.springapp.mvc;
+package com.springapp.forms;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.Role;
-import com.springapp.Entity.User;
+import com.springapp.entity.Computer;
+import com.springapp.entity.Role;
+import com.springapp.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.constraints.Email;
@@ -11,7 +11,6 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class AdminUserForm implements Serializable  {

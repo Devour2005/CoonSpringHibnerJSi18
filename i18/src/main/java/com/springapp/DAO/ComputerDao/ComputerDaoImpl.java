@@ -1,9 +1,9 @@
-package com.springapp.DAO.ComputerDao;
+package com.springapp.dao.computerDao;
 
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Util.HibernateUtil;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.util.HibernateUtil;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.hibernate.*;

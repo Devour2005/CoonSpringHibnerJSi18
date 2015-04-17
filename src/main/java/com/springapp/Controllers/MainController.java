@@ -1,10 +1,9 @@
-package com.springapp.Controllers;
+package com.springapp.controllers;
 
-import com.springapp.Calculation.DataInputForm;
-import com.springapp.Entity.User;
-import com.springapp.Service.ComputerService.ComputerService;
-import com.springapp.Service.UserService.UserService;
-import com.springapp.mvc.LoginForm;
+import com.springapp.calculation.DataInputForm;
+import com.springapp.entity.User;
+import com.springapp.service.computerService.ComputerService;
+import com.springapp.service.userService.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +87,7 @@ public class MainController {
     @Secured(value = {"admin", "user"})
     @RequestMapping(value = "calculatePage", method = RequestMethod.GET)
     private ModelAndView piCalculation() {
-        logger.info("Go to Calculation Page!");
+        logger.info("Go to calculation Page!");
         return new ModelAndView("calculation", "dataInputForm", new DataInputForm());
     }
 
@@ -98,10 +97,4 @@ public class MainController {
         model.addAttribute("errorMsg", "Wrong Login or Password");
         return "login";
     }
-
-    /*@RequestMapping(value = "loginError", method = RequestMethod.GET)
-    private String noSuchUser() {
-        logger.info("No Such User!");
-        return "nosuchuser";
-    }*/
 }

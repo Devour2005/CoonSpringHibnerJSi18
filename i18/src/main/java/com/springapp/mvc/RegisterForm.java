@@ -1,7 +1,7 @@
-package com.springapp.mvc;
+package com.springapp.forms;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.validator.constraints.Email;
@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 

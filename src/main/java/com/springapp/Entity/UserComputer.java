@@ -1,4 +1,4 @@
-package com.springapp.Entity;
+package com.springapp.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +36,6 @@ public class UserComputer implements Serializable {
     }
 
     public UserComputer(Integer userId, Integer compId) {
-//        this.id = id;
         this.userId = userId;
         this.compId = compId;
     }

@@ -27,7 +27,7 @@
           class="org.springframework.dao.support.PersistenceExceptionTranslationInterceptor"/>
     <aop:config>
         <aop:advisor advice-ref="exceprionTranslationInterceptor"
-                     pointcut="execution(* com.springapp.DAO.UserDao.*(..) )"/>
+                     pointcut="execution(* com.springapp.dao.userDao.*(..) )"/>
     </aop:config>
 
 
@@ -41,12 +41,12 @@
      </aop:aspectj-autoproxy>-->
 
 
-    <bean id="timeCounterAspect" class="com.springapp.Calculation.TimeCountAspect"/>
+    <bean id="timeCounterAspect" class="com.springapp.calculation.TimeCountAspect"/>
 
     <!--  <aop:config>
           <aop:aspect id="timeCount" ref="timeCounterAspect">
               <aop:pointcut id="calculation" expression=
-                      "execution(* com.springapp.Calculation.PiCalculator.call(..))"/>
+                      "execution(* com.springapp.calculation.PiCalculator.call(..))"/>
               &lt;!&ndash; Совет, выполняемый и до, и после &ndash;&gt;
               <aop:around
                       pointcut-ref="calculation"
@@ -104,10 +104,10 @@
         </property>
         <property name="annotatedClasses">
             <list>
-                <value>com.springapp.Entity.User</value>
-                <value>com.springapp.Entity.Role</value>
-                <value>com.springapp.Entity.Computer</value>
-                <value>com.springapp.Entity.UserComputer</value>
+                <value>com.springapp.entity.User</value>
+                <value>com.springapp.entity.Role</value>
+                <value>com.springapp.entity.Computer</value>
+                <value>com.springapp.entity.UserComputer</value>
             </list>
         </property>
 
@@ -142,7 +142,7 @@
     </bean>
 
 
-    <bean class="com.springapp.Exceptions.CustomExceptionResolver">
+    <bean class="com.springapp.exceptions.CustomExceptionResolver">
         <property name="exceptionMappings">
             <map>
                 <entry key="com.springapp.exceptions.CustomExceptionResolver" value="/exceptionPages/exceptions"/>

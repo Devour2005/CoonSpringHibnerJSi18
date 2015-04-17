@@ -1,10 +1,9 @@
-package com.springapp.DAO.UserDao;
+package com.springapp.dao.userDao;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Exceptions.LoginException;
-import com.springapp.Exceptions.NotUniqueEmailException;
-import com.springapp.Util.HibernateUtil;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.exceptions.LoginException;
+import com.springapp.util.HibernateUtil;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -15,9 +14,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -97,9 +93,6 @@ public class UserDaoImpl extends AbstractUserDao {
         if (user.getEmail() == null || user.getEmail().intern().equals("")) {
             throw new IllegalArgumentException();
         }
-        /*if (getUserByEmail(user.getEmail()).getEmail() != null) {
-            throw new NotUniqueEmailException("The email of user not unique! " + user.getEmail());
-        }*/
         currentSession().saveOrUpdate(user);
     }
 

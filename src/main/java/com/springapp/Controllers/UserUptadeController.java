@@ -1,12 +1,12 @@
-package com.springapp.Controllers;
+package com.springapp.controllers;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Service.ComputerService.ComputerService;
-import com.springapp.Service.RoleService.RoleService;
-import com.springapp.Service.UserService.UserService;
-import com.springapp.Validators.UpdateValidator;
-import com.springapp.mvc.UserForm;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.service.computerService.ComputerService;
+import com.springapp.service.roleService.RoleService;
+import com.springapp.service.userService.UserService;
+import com.springapp.validators.UpdateValidator;
+import com.springapp.forms.UserForm;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

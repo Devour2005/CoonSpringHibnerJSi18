@@ -12,16 +12,18 @@
                    use-expressions="true">
 
         <security:form-login login-page="/login" default-target-url="/welcome"
-                             authentication-failure-url="/loginError"/>
+                             authentication-failure-url="/login"/>
+                             <!--authentication-failure-url="/loginError"/>-->
         <security:intercept-url pattern="/login" access="permitAll"/>
 
         <!--Commented till testing-->
+
         <!-- <security:intercept-url pattern="/adminPage"
                                 access="hasRole('admin')"/>-->
 
         <security:intercept-url pattern="/edit" access="hasAnyRole('admin', 'user')"/>
         <security:intercept-url pattern="/editUser" access="hasRole('admin')"/>
-        <security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')"/>
+        <!--<security:intercept-url pattern="/welcome" access="hasAnyRole('admin', 'user')"/>-->
         <!--<security:intercept-url pattern="/calculation" access="hasAnyRole('admin', 'userForUpdate')"/>-->
         <!--<security:intercept-url pattern="/calculResults" access="hasAnyRole('admin', 'userForUpdate')"/>-->
         <!--<security:intercept-url pattern="/calculatePage" access="hasAnyRole('admin', 'userForUpdate')"/>-->

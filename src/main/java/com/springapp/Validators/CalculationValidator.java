@@ -1,6 +1,6 @@
-package com.springapp.Validators;
+package com.springapp.validators;
 
-import com.springapp.Calculation.DataInputForm;
+import com.springapp.calculation.DataInputForm;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;

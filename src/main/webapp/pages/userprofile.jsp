@@ -6,6 +6,7 @@
 <head>
     <title>Coon Portal - Profile Page</title>
     <link rel="stylesheet" type="text/css" href="${app}/style.css"/>
+    <link rel="shortcut icon" href="${app}pictures/favicon.ico">
 </head>
 <body>
 <!--BEGIN of HEADER-->
@@ -29,14 +30,7 @@
     <!--CENTRAL BLOCK-->
     <DIV class="content_center">
         <!--NAVIGATION MENU -->
-        <div>
-            <ul id="navigation">
-                <li class="first-link"><a href="${app}/welcome" title="home">Home</a></li>
-                <li><a href="${app}/calculatePage" title="calculation">Calculation</a></li>
-                <li><a href="${app}/pages/userprofile.jsp" title="user profile">User profile</a></li>
-                <li><a href="${app}/pages/contacts.jsp" title="contacts">Contacts</a></li>
-            </ul>
-        </div>
+        <jsp:include page="menu.jsp"/>
         <!--END OF NAVIGATION MENU -->
 
         <DIV class="profile_block">

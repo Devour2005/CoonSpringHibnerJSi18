@@ -1,8 +1,8 @@
-package com.springapp.Service.ComputerService;
+package com.springapp.service.computerService;
 
-import com.springapp.DAO.ComputerDao.ComputerDao;
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
+import com.springapp.dao.computerDao.ComputerDao;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

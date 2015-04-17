@@ -1,9 +1,8 @@
-package com.springapp.DAO.UserDao;
+package com.springapp.dao.userDao;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Exceptions.LoginException;
-import com.springapp.Exceptions.NotUniqueEmailException;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.exceptions.LoginException;
 
 import java.util.List;
 import java.util.Set;
@@ -32,5 +31,5 @@ public interface UserDao {
 
     abstract public boolean isUserExists(User user);
 
-    abstract public boolean isEmailExists(User user);
+    abstract public boolean isEmailExist(User user);
 }

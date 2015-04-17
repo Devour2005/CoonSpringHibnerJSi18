@@ -1,11 +1,9 @@
-package com.springapp.DAO.UserDao;
+package com.springapp.dao.userDao;
 
-import com.springapp.Entity.Computer;
-import com.springapp.Entity.User;
-import com.springapp.Exceptions.LoginException;
-import com.springapp.Exceptions.NotUniqueEmailException;
-import com.springapp.Util.HibernateUtil;
-import org.hibernate.Criteria;
+import com.springapp.entity.Computer;
+import com.springapp.entity.User;
+import com.springapp.exceptions.LoginException;
+import com.springapp.util.HibernateUtil;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,9 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -45,6 +40,19 @@ public class UserDaoImpl extends AbstractUserDao {
 
     @Override
     @Transactional
+   /* public boolean isUserExists(User user) {
+        boolean result = true;
+        User u = (User) currentSession().createCriteria(User.class)
+                .add(Restrictions.disjunction()
+                        .add(Restrictions.eq("login", user.getLogin()))
+                        .add(Restrictions.eq("email", user.getEmail()))).uniqueResult();
+        if (u == null) {
+            result = false;
+        }
+        return result;
+    }*/
+
+    //HQL version
     public boolean isUserExists(User user) {
         Session session = HibernateUtil.openSession();
         boolean result = true;
@@ -58,10 +66,23 @@ public class UserDaoImpl extends AbstractUserDao {
         return result;
     }
 
+//    @Override
+//    @Transactional
+/*    public boolean isEmailExists(User user) {
+        boolean result = true;
+        Property email = Property.forName("email");
+        User u = (User) currentSession().createCriteria(User.class).
+                add(Restrictions.eq("email", user.getEmail())).uniqueResult();
+        if (u == null) {
+            result = false;
+        }
+        return result;
+    }*/
 
     @Override
     @Transactional
-    public boolean isEmailExists(User user) {
+    //HQL version
+    public boolean isEmailExist(User user) {
         Session session = HibernateUtil.openSession();
         boolean result = true;
         Query query = session.createQuery("SELECT u FROM User u WHERE u.email=?");
@@ -72,17 +93,6 @@ public class UserDaoImpl extends AbstractUserDao {
         }
         return result;
     }
-
-
-   /* @Override
-    @Transactional
-    public boolean updateUser(User user) {
-        if (isUserExists(user)) {
-            return false;
-        }
-        currentSession().update(user);
-        return true;
-    } */
 
 
     @Override
@@ -102,6 +112,16 @@ public class UserDaoImpl extends AbstractUserDao {
         }*/
         currentSession().saveOrUpdate(user);
     }
+
+     /* @Override
+    @Transactional
+    public boolean updateUser(User user) {
+        if (isUserExists(user)) {
+            return false;
+        }
+        currentSession().update(user);
+        return true;
+    } */
 
     @Override
     @Transactional
@@ -176,17 +196,8 @@ public class UserDaoImpl extends AbstractUserDao {
     @Override
     @Transactional
     public List<User> getAllUsers() {
-        Criteria criteria = currentSession().createCriteria(User.class);
-        return criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY).list();
+        return currentSession().createCriteria(User.class).list();
     }
-
-   /* @Override
-    @Transactional
-    public List<User> getAllUsers() {
-        Session session = HibernateUtil.openSession();
-        return session.createQuery("from User").list();
-    }*/
-
 
     @Override
     @Transactional

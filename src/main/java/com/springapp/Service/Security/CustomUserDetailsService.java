@@ -1,6 +1,6 @@
-package com.springapp.Service.Security;
+package com.springapp.service.security;
 
-import com.springapp.Service.UserService.UserService;
+import com.springapp.service.userService.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,7 +24,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
         try {
-            com.springapp.Entity.User domainUser = userService.getUserByLogin(login);
+            com.springapp.entity.User domainUser = userService.getUserByLogin(login);
 
             boolean enabled = true;
             boolean accountNonExpired = true;

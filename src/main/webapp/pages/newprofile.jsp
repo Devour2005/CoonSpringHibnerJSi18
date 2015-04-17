@@ -29,18 +29,8 @@
     <!--CENTRAL BLOCK-->
     <DIV class="content_center">
         <!--NAVIGATION MENU -->
-        <DIV>
-            <ul id="navigation">
-                <li class="first-link"><a href="${app}/pages/welcome.jsp"
-                                          title="home">Home</a></li>
-                <li><a href="${app}/calculatePage"
-                       title="calculation">Calculation</a></li>
-                <li><a href="${app}/pages/userprofile.jsp" title="my profile">My profile</a>
-                </li>
-                <li><a href="${app}/pages/contacts.jsp" title="contacts">Contacts</a></li>
-            </UL>
-        </DIV>
-        <!--NAVIGATION MENU -->
+        <jsp:include page="menu.jsp"/>
+        <!--END OF NAVIGATION MENU -->
 
         <DIV class="profile_block">
             <!--USER INFO BLOCK-->

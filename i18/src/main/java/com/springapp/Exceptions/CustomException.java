@@ -1,4 +1,4 @@
-package com.springapp.Exceptions;
+package com.springapp.exceptions;
 
 @SuppressWarnings("serial")
 public class CustomException extends Exception {

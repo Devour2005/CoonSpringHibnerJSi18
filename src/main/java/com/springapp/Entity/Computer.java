@@ -1,10 +1,9 @@
-package com.springapp.Entity;
+package com.springapp.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;

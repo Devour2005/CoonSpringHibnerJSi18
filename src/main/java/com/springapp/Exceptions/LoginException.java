@@ -1,4 +1,4 @@
-package com.springapp.Exceptions;
+package com.springapp.exceptions;
 
 public class LoginException extends DBException {
     public LoginException(String message) {
